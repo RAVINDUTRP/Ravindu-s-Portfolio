@@ -1,6 +1,20 @@
 node_modules/
 .next/
 out/
+.env*
+.DS_Store
+*.log
+coverage/
+.vercel
+.idea
+.vscode
+*.local
+*.tsbuildinfo
+**/*.local
+# build artifacts
 dist/
-.env
+# lockfiles
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
 
