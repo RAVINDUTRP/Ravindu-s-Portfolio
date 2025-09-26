@@ -34,6 +34,5 @@ Welcome to my personal portfolio website! This site showcases my projects, skill
 - GitHub: [gitHub](https://github.com/RAVINDUTRP)  
 - LinkedIn: [LinkedIn](https://www.linkedin.com/in/ravindu-piyumal-7b0a592a8/)  
 - Email: ravindupiyumal483@gmail.com 
-
 ---
-Feel free to fork, explore, or reach out if you're interested in collaboration or feedback!
+⭐ Feel free to fork, explore, or reach out if you're interested in collaboration or feedback! ⭐
