@@ -11,6 +11,14 @@ Welcome to my personal portfolio website! This site showcases my projects, skill
 - **Languages**: TypeScript, JavaScript, HTML, CSS
 - **Tools**: Cursor, GitHub, VS Code
 
+## ✨ Features
+
+- ✅ Fully responsive design (mobile-first)
+- ✅ Modern UI with clean animations
+- ✅ Projects & skills showcase
+- ✅ About & contact sections
+- ✅ Fast and optimized with Next.js
+
 ## 📁 Project Structure
 
 - `app/` – Core application logic  
@@ -18,7 +26,8 @@ Welcome to my personal portfolio website! This site showcases my projects, skill
 - `hooks/` – Custom React hooks  
 - `lib/` – Utility functions  
 - `public/` – Static assets  
-- `.gitignore`, `README.md`, `package.json`, `tailwind.config.js`, `tsconfig.json` – Configuration files  
+- `.gitignore`, `README.md`, `package.json`, `tailwind.config.js`, `tsconfig.json` – Configuration files
+
 
 ## 📫 Contact
 
