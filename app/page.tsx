@@ -7,6 +7,7 @@ import AboutSection from "@/components/about-section"
 import EducationSection from "@/components/education-section"
 import SkillsSection from "@/components/skills-section"
 import ProjectsSection from "@/components/projects-section"
+import AchivementSection from "@/components/achivement"
 import ContactSection from "@/components/contact-section"
 import SocialSidebar from "@/components/social-sidebar"
 import Footer from "@/components/footer"
@@ -39,6 +40,10 @@ export default function Portfolio() {
 
         <section id="projects" className="section-blue scroll-snap-item">
           <ProjectsSection />
+        </section>
+
+        <section id="achivements" className="section-purple scroll-snap-item">
+          <AchivementSection />
         </section>
 
         <section id="contact" className="section-purple scroll-snap-item">
