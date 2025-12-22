@@ -62,10 +62,11 @@ export default function SocialSidebar() {
           setShowSocialIcons(false)
           setShowToggle(true)
         } else {
-          // Scrolling up
+          // Scrolling up - auto hide sidebar
           setIsScrollingDown(false)
-          setShowArrow(true)
+          setShowArrow(false)
           setIsVisible(false)
+          setShowSocialIcons(false) // Auto-hide when scrolling up
           setShowToggle(true)
         }
       }

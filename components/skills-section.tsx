@@ -38,6 +38,7 @@ const SKILLS = [
   { name: "IntelliJ IDEA", icon: <Brain className="w-8 h-8 text-white" />, subtitle: "IDE", iconBg: "bg-gradient-to-br from-gray-700 to-black", glow: "shadow-[0_4px_32px_0_rgba(55,65,81,0.4)]", border: "border-gray-700", bgHover: "hover:bg-gray-900/40" },
   { name: "Python IDLE", icon: <Terminal className="w-8 h-8 text-white" />, subtitle: "IDE", iconBg: "bg-gradient-to-br from-yellow-400 to-yellow-600", glow: "shadow-[0_4px_32px_0_rgba(250,204,21,0.4)]", border: "border-yellow-400", bgHover: "hover:bg-yellow-900/40" },
   { name: "Cursor", icon: <Bot className="w-8 h-8 text-white" />, subtitle: "Editor", iconBg: "bg-gradient-to-br from-indigo-400 to-indigo-700", glow: "shadow-[0_4px_32px_0_rgba(99,102,241,0.4)]", border: "border-indigo-400", bgHover: "hover:bg-indigo-900/40" },
+  { name: "Jupyter Notebook", icon: <FileCode2 className="w-8 h-8 text-white" />, subtitle: "Tool", iconBg: "bg-gradient-to-br from-orange-500 to-amber-600", glow: "shadow-[0_4px_32px_0_rgba(251,146,60,0.4)]", border: "border-orange-500", bgHover: "hover:bg-orange-900/40" },
 ];
 
 // Add skill categories and percentages for the progress bar section
@@ -69,6 +70,7 @@ const SKILL_CARDS = [
   { name: "IntelliJ IDEA", icon: <Brain className="w-7 h-7" />, percent: 80, category: "Tools", color: "#000000" },
   { name: "Python IDLE", icon: <Terminal className="w-7 h-7" />, percent: 70, category: "Tools", color: "#FFD43B" },
   { name: "Cursor", icon: <Bot className="w-7 h-7" />, percent: 75, category: "Tools", color: "#5D3FD3" },
+  { name: "Jupyter Notebook", icon: <FileCode2 className="w-7 h-7" />, percent: 85, category: "Tools", color: "#F37626" },
 ];
 
 const CATEGORIES = [

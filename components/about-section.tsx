@@ -14,7 +14,7 @@ export default function AboutSection() {
   const images = [
     "/assets/images/propic1.jpeg",
     "/assets/images/propic2.JPG",
-    "/assets/images/propic3.jpg",
+    "/assets/images/propic3.JPG",
     "/assets/images/propic4.jpg",
     "/assets/images/propic5.jpeg",
   ]
@@ -74,11 +74,12 @@ export default function AboutSection() {
 
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Image Gallery */}
-          <motion.div variants={imageVariants} className="flex gap-4">
+          <motion.div variants={imageVariants} className="flex gap-4 items-center">
             {/* Main Image */}
             <div className="flex-1">
               <div className="relative h-[500px] rounded-2xl overflow-hidden shadow-2xl transition-all duration-500">
                 <Image
+                  key={selectedImage}
                   src={images[selectedImage] || "/placeholder.svg"}
                   alt={imageLabels[selectedImage] || "About section image"}
                   fill

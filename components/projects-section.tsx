@@ -40,7 +40,8 @@ export default function ProjectsSection() {
       scale: 1,
       y: 0,
       transition: {
-        duration: 1.1,
+        duration: 1.2,
+        ease: [0.16, 1, 0.3, 1] as [number, number, number, number], // Ultra-smooth ease-out-expo curve
       },
     },
   };
@@ -56,16 +57,29 @@ export default function ProjectsSection() {
       githubLink: "https://github.com/RAVINDUTRP/Coffee-Shop.git",
       liveLink: "#",
       category: "Web Development",
+      subCategory: "Frontend Development",
     },
     {
       id: "web-2",
       title: "Diamond Crown",
       description: "A full-stack e-commerce solution with user authentication, product management, and secure payments.",
       image: "/assets/pro-images/diamond-crown.jpg",
-      technologies: ["Reac.js", "MongoDB", "Node.js", "Tailwind CSS", "Express.js"],
-      githubLink: "#",
+      technologies: ["React.js", "MongoDB", "Node.js", "Tailwind CSS", "Express.js"],
+      githubLink: "https://github.com/RAVINDUTRP/Diamond-Crown",
       liveLink: "#",
       category: "Web Development",
+      subCategory: "Full-Stack Development",
+    },
+    {
+      id: "web-3",
+      title: "Portfolio Website",
+      description: "A modern, fully responsive personal portfolio website built to showcase projects, skills, and experience. Features smooth navigation, interactive UI components, and a clean design optimized for performance and accessibility.",
+      image: "/assets/pro-images/portfolio1.png",
+      technologies: ["TypeScript", "JavaScript", "CSS", "Tailwind CSS", "Next.js", "React"],
+      githubLink: "https://github.com/RAVINDUTRP/Ravindu-s-Portfolio",
+      liveLink: "https://beautiful-hamster-712e1d.netlify.app/",
+      category: "Web Development",
+      subCategory: "Frontend Development",
     },
     // Mobile Application
     {
@@ -139,6 +153,16 @@ export default function ProjectsSection() {
       liveLink: "#",
       category: "UI/UX Design",
     },
+    {
+      id: "uiux-2",
+      title: "wasi.lk",
+      description: "A UI/UX redesign concept for Wasi.lk, designed in Figma from low-fidelity wireframes to high-fidelity UI with a focus on clarity, usability, and product discovery.",
+      image: "/assets/pro-images/wasilk.png",
+      technologies: ["Figma"],
+      githubLink: "https://www.figma.com/proto/sAgZBPNCu8zC87vYdsUBeS/Wasi.lk?page-id=0%3A1&node-id=3-6&p=f&viewport=273%2C191%2C0.05&t=nAtg7nZeyCeFF2W6-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=3%3A6",
+      liveLink: "#",
+      category: "UI/UX Design",
+    },
   ];
 
   const categories = [
@@ -147,8 +171,16 @@ export default function ProjectsSection() {
     "UI/UX Design",
     "Other",
   ];
+  const webSubcategories = [
+    "All",
+    "Frontend Development",
+    "Backend Development",
+    "Full-Stack Development",
+    "DevOps / Deployment",
+  ];
 
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
+  const [selectedWebSub, setSelectedWebSub] = useState<string>(webSubcategories[0]);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -156,6 +188,12 @@ export default function ProjectsSection() {
       scrollRef.current.scrollLeft = 0;
     }
   }, [selectedCategory]);
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollLeft = 0;
+    }
+  }, [selectedWebSub]);
 
   return (
     <motion.div 
@@ -188,6 +226,25 @@ export default function ProjectsSection() {
               ))}
             </div>
           </div>
+          {selectedCategory === 'Web Development' && (
+            <div className="flex justify-center gap-2 mt-4">
+              <div className="flex flex-wrap gap-2 justify-center w-full">
+                {webSubcategories.map((sub) => (
+                  <button
+                    key={sub}
+                    onClick={() => setSelectedWebSub(sub)}
+                    className={`px-3 py-2 text-sm font-medium transition-colors duration-200 focus:outline-none whitespace-nowrap border-b-2
+                      ${selectedWebSub === sub
+                        ? 'text-gray-900 dark:text-white border-gray-800 dark:border-gray-200'
+                        : 'text-gray-600 dark:text-gray-300 border-transparent hover:text-gray-900 dark:hover:text-white hover:border-gray-400 dark:hover:border-gray-500'}
+                    `}
+                  >
+                    {sub}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
         </motion.div>
 
         <div className="mb-16">
@@ -198,6 +255,7 @@ export default function ProjectsSection() {
           >
             {[...projects]
               .filter(p => p.category === selectedCategory)
+              .filter(p => selectedCategory !== 'Web Development' || selectedWebSub === 'All' || (p as any).subCategory === selectedWebSub)
               .filter(p => selectedCategory !== 'Mobile Application' || !/demo/i.test(p.title + p.description))
               .reverse()
               .map((project, index) => {
@@ -216,13 +274,19 @@ export default function ProjectsSection() {
                     boxShadow: "0 16px 40px 0 rgba(30,64,175,0.14)",
                     zIndex: 30,
                     transition: { 
-                      duration: 0.7, // longer for smoothness
-                      ease: [0.22, 1, 0.36, 1] // more natural cubic-bezier
+                      type: "spring",
+                      stiffness: 300,
+                      damping: 30,
+                      mass: 0.8
                     }
                   }}
                   whileTap={{ 
                     scale: 0.985,
-                    transition: { duration: 0.18, ease: [0.22, 1, 0.36, 1] }
+                    transition: { 
+                      type: "spring",
+                      stiffness: 400,
+                      damping: 25
+                    }
                   }}
                   className="relative bg-gradient-to-br from-blue-50/80 via-white/80 to-blue-100/60 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 border border-blue-100 dark:border-gray-700 rounded-3xl shadow-xl overflow-hidden group transition-all duration-500 min-w-[260px] max-w-[90vw] sm:min-w-[320px] sm:max-w-[320px]"
                   style={{ minHeight: 340 }}
@@ -232,7 +296,7 @@ export default function ProjectsSection() {
                     <img
                       src={project.image || "/placeholder.svg"}
                       alt={project.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent z-10" />
                   </div>
@@ -257,20 +321,38 @@ export default function ProjectsSection() {
                         </div>
                       ) : (
                         <>
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            className="flex-1 border-blue-500 text-blue-600 hover:bg-blue-50 dark:border-blue-400 dark:text-blue-400 dark:hover:bg-blue-900/30 transition-all duration-200 bg-transparent"
-                            asChild
-                          >
-                            <a href={project.liveLink} target="_blank" rel="noopener noreferrer">
+                          {(project.liveLink && project.liveLink !== '#' && project.liveLink !== '##') ? (
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className={`flex-1 border-blue-500 text-blue-600 dark:border-blue-400 dark:text-blue-400 transition-all duration-200 bg-transparent ${
+                                project.title === "Portfolio Website"
+                                  ? "hover:bg-blue-50 dark:hover:bg-blue-900/30 hover:border-blue-400 hover:text-blue-700 dark:hover:text-blue-300 hover:shadow-[0_0_10px_rgba(59,130,246,0.5),0_0_20px_rgba(59,130,246,0.3),0_0_30px_rgba(59,130,246,0.2)] hover:shadow-blue-500/50"
+                                  : "hover:bg-blue-50 dark:hover:bg-blue-900/30"
+                              }`}
+                              asChild
+                            >
+                              <a href={project.liveLink} target="_blank" rel="noopener noreferrer">
+                                <ExternalLink className="mr-2 h-4 w-4" />
+                                Live Demo
+                              </a>
+                            </Button>
+                          ) : (
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="flex-1 border-blue-500 text-blue-600 dark:border-blue-400 dark:text-blue-400 opacity-60 cursor-not-allowed bg-transparent"
+                              disabled
+                            >
                               <ExternalLink className="mr-2 h-4 w-4" />
                               Live Demo
-                            </a>
-                          </Button>
-                          <div className="flex items-center h-full">
-                            <GithubButton githubLink={project.githubLink} />
-                          </div>
+                            </Button>
+                          )}
+                          {project.githubLink && project.githubLink !== '#' && (
+                            <div className="flex items-center h-full">
+                              <GithubButton githubLink={project.githubLink} />
+                            </div>
+                          )}
                         </>
                       )}
                     </div>
