@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { Download, Eye, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { motion } from "framer-motion"
+import { motion, useMotionValue, useMotionTemplate } from "framer-motion"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { useIsMobile } from "@/components/ui/use-mobile"
 import { Menu, X } from "lucide-react"
@@ -12,14 +12,15 @@ import dynamic from 'next/dynamic';
 const PDFDownloadButton = dynamic(() => import('@/components/PDFDownloadButton'), { ssr: false });
 
 export default function Hero() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const mouseX = useMotionValue(0)
+  const mouseY = useMotionValue(0)
   const [isLoaded, setIsLoaded] = useState(false)
   // Animated subtitle roles
   const roles = [
+    "Full Stack Developer",
     "Frontend Developer",
     "UI/UX Designer",
-    "Tech Enthusiast",
-    "Problem Solver"
+    "Tech Enthusiast"
   ];
   const [roleIndex, setRoleIndex] = useState(0);
   const isMobile = useIsMobile();
@@ -51,11 +52,14 @@ export default function Hero() {
   useEffect(() => {
     setIsLoaded(true)
     const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY })
+      mouseX.set(e.clientX)
+      mouseY.set(e.clientY)
     }
     window.addEventListener("mousemove", handleMouseMove)
     return () => window.removeEventListener("mousemove", handleMouseMove)
-  }, [])
+  }, [mouseX, mouseY])
+
+  const background = useMotionTemplate`radial-gradient(circle 400px at ${mouseX}px ${mouseY}px, rgba(59, 130, 246, 0.15) 0%, transparent 50%)`
 
   return (
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-white via-blue-50 to-indigo-100 dark:from-[#05071a] dark:via-[#181c2f] dark:to-[#1a1333]">
@@ -97,10 +101,10 @@ export default function Hero() {
         <div className="hidden dark:block absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-[#05071a]/60 to-[#18122b]/60 rounded-full blur-3xl animate-spin-slower"></div>
 
         {/* Interactive Mouse Gradient */}
-        <div
+        <motion.div
           className="absolute inset-0 opacity-30 transition-all duration-300"
           style={{
-            background: `radial-gradient(circle 400px at ${mousePosition.x}px ${mousePosition.y}px, rgba(59, 130, 246, 0.15) 0%, transparent 50%)`,
+            background,
           }}
         />
 

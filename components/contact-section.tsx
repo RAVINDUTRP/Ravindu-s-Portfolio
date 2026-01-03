@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
-import { Mail, Phone, MapPin, Send } from "lucide-react"
+import { Mail, Phone, MapPin, Send, Coffee } from "lucide-react"
 
 export default function ContactSection() {
   const { ref, isInView } = useScrollAnimationFramer()
@@ -165,6 +165,22 @@ export default function ContactSection() {
                 I'm always interested in hearing about new opportunities and exciting projects. Whether you have a question or just want to say hi, feel free to reach out!
               </p>
             </div>
+
+            <motion.a
+              href="https://buymeacoffee.com/ravindupiyumal"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="flex items-center gap-4 p-4 bg-amber-400 hover:bg-amber-300 text-slate-900 rounded-xl font-bold shadow-lg shadow-amber-500/20 transition-all duration-300 group"
+            >
+              <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                <Coffee className="w-6 h-6" />
+              </div>
+              <div>
+                <h4 className="font-['Cookie'] text-2xl tracking-wide leading-none pt-1">Buy me a coffee</h4>
+              </div>
+            </motion.a>
 
             <div className="space-y-6">
               <motion.div 

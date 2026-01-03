@@ -11,10 +11,7 @@ import AchivementSection from "@/components/achivement"
 import ContactSection from "@/components/contact-section"
 import SocialSidebar from "@/components/social-sidebar"
 import Footer from "@/components/footer"
-import { useScrollAnimation } from "@/hooks/use-scroll-animation"
-
 export default function Portfolio() {
-  const { currentSection, scrollToSection } = useScrollAnimation()
 
   return (
     <div className="min-h-screen bg-background transition-colors duration-300">

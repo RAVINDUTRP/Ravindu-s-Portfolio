@@ -17,10 +17,10 @@ export default function Navbar() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50)
       setIsScrolling(true)
-      
+
       // Clear the previous timeout
       clearTimeout(scrollTimeout)
-      
+
       // Set a timeout to remove the scrolling state after scrolling stops
       scrollTimeout = setTimeout(() => {
         setIsScrolling(false)
@@ -40,6 +40,7 @@ export default function Navbar() {
     { name: "Education", href: "#education" },
     { name: "Skills", href: "#skills" },
     { name: "Projects", href: "#projects" },
+    { name: "Achievements", href: "#achivements" },
     { name: "Contact", href: "#contact" },
   ]
 
@@ -89,11 +90,10 @@ export default function Navbar() {
         <div className="relative max-w-7xl mx-auto">
           {/* Rounded Navigation Container */}
           <div
-            className={`relative rounded-full px-6 py-2 transition-all duration-500 overflow-hidden ${
-              isScrolled 
-                ? "bg-background shadow-xl border border-border/50" 
+            className={`relative rounded-full px-6 py-2 transition-all duration-500 overflow-hidden ${isScrolled
+                ? "bg-background shadow-xl border border-border/50"
                 : "bg-background shadow-md border border-border/30"
-            }`}
+              }`}
           >
             <div className="flex items-center justify-between">
               {/* Logo - Left */}
@@ -129,9 +129,9 @@ export default function Navbar() {
 
                 {/* Mobile Menu Button */}
                 <div className="md:hidden flex items-center">
-                  <Button 
-                    variant="ghost" 
-                    size="icon" 
+                  <Button
+                    variant="ghost"
+                    size="icon"
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                     className="h-8 w-8 rounded-full hover:bg-accent/50"
                   >

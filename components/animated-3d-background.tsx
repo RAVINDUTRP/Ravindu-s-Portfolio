@@ -57,10 +57,13 @@ function Stars({ count = 400, color = '#b3cfff' }) {
     return createStarTexture();
   }, []);
 
-  // Twinkle effect: animate opacity of the stars
-  const [twinkle, setTwinkle] = useState(0);
+  // Ref for the material to animate opacity without re-renders
+  const materialRef = useRef<THREE.PointsMaterial>(null);
+
   useFrame((state) => {
-    setTwinkle(Math.abs(Math.sin(state.clock.getElapsedTime() * 0.8)) * 0.4 + 0.6);
+    if (materialRef.current) {
+      materialRef.current.opacity = Math.abs(Math.sin(state.clock.getElapsedTime() * 0.8)) * 0.4 + 0.6;
+    }
     if (mesh.current) {
       mesh.current.rotation.y += 0.0008;
       mesh.current.rotation.x += 0.0002;
@@ -80,11 +83,12 @@ function Stars({ count = 400, color = '#b3cfff' }) {
         />
       </bufferGeometry>
       <pointsMaterial
+        ref={materialRef}
         color={color}
         size={3.5}
         sizeAttenuation
         transparent
-        opacity={twinkle}
+        opacity={0.8} // Initial opacity
         map={starTexture}
         alphaTest={0.2}
         depthWrite={false}
