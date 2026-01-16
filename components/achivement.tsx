@@ -46,6 +46,7 @@ export default function AchivementSection() {
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const [showFullCertificate, setShowFullCertificate] = useState(false)
   const [selectedAchievement, setSelectedAchievement] = useState<Achievement | null>(null)
+  const [currentIndex, setCurrentIndex] = useState(0)
 
   const scrollLeft = () => {
     if (scrollContainerRef.current) {
@@ -131,18 +132,18 @@ export default function AchivementSection() {
             <>
               <button 
                 onClick={scrollLeft}
-                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-20 p-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] hover:bg-white/20 hover:scale-110 transition-all duration-300 hidden md:flex items-center justify-center group"
+                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-20 p-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] hover:bg-white/20 hover:scale-110 transition-all duration-300 hidden md:flex items-center justify-center group"
                 aria-label="Scroll left"
               >
-                <ChevronLeft className="w-4 h-4 text-slate-700 dark:text-white group-hover:-translate-x-0.5 transition-transform" />
+                <ChevronLeft className="w-3 h-3 text-slate-700 dark:text-white group-hover:-translate-x-0.5 transition-transform" />
               </button>
 
               <button 
                 onClick={scrollRight}
-                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-20 p-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] hover:bg-white/20 hover:scale-110 transition-all duration-300 hidden md:flex items-center justify-center group"
+                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-20 p-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] hover:bg-white/20 hover:scale-110 transition-all duration-300 hidden md:flex items-center justify-center group"
                 aria-label="Scroll right"
               >
-                <ChevronRight className="w-4 h-4 text-slate-700 dark:text-white group-hover:translate-x-0.5 transition-transform" />
+                <ChevronRight className="w-3 h-3 text-slate-700 dark:text-white group-hover:translate-x-0.5 transition-transform" />
               </button>
             </>
           )}
@@ -216,6 +217,29 @@ export default function AchivementSection() {
             )
           })}
         </motion.div>
+        
+        {achievements.length > 1 && (
+          <div className="flex justify-center gap-2 mt-6">
+            {achievements.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => {
+                  if (scrollContainerRef.current) {
+                    const cardWidth = 400
+                    scrollContainerRef.current.scrollTo({ left: index * cardWidth, behavior: "smooth" })
+                    setCurrentIndex(index)
+                  }
+                }}
+                className={`transition-all duration-300 rounded-full ${
+                  index === currentIndex
+                    ? "w-8 h-2 bg-amber-500 dark:bg-amber-400"
+                    : "w-2 h-2 bg-slate-300 dark:bg-slate-600 hover:bg-amber-300 dark:hover:bg-amber-600"
+                }`}
+                aria-label={`Go to achievement ${index + 1}`}
+              />
+            ))}
+          </div>
+        )}
         </div>
       </div>
 
