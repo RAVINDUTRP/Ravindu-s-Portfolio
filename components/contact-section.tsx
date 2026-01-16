@@ -166,21 +166,7 @@ export default function ContactSection() {
               </p>
             </div>
 
-            <motion.a
-              href="https://buymeacoffee.com/ravindupiyumal"
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="flex items-center gap-4 p-4 bg-amber-400 hover:bg-amber-300 text-slate-900 rounded-xl font-bold shadow-lg shadow-amber-500/20 transition-all duration-300 group"
-            >
-              <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
-                <Coffee className="w-6 h-6" />
-              </div>
-              <div>
-                <h4 className="font-['Cookie'] text-2xl tracking-wide leading-none pt-1">Buy me a coffee</h4>
-              </div>
-            </motion.a>
+
 
             <div className="space-y-6">
               <motion.div 
@@ -228,11 +214,11 @@ export default function ContactSection() {
 
             <motion.div variants={itemVariants} className="pt-6">
               <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Follow Me</h4>
-              <div className="flex gap-4">
+              <div className="flex gap-4 flex-wrap">
                 {[
                   { name: "GitHub", href: "https://github.com/RAVINDUTRP", color: "bg-gray-500 hover:bg-gray-700" },
                   { name: "LinkedIn", href: "https://www.linkedin.com/in/ravindu-piyumal-7b0a592a8/", color: "bg-blue-600 hover:bg-blue-700" },
-                  
+                  { name: "Buy me a coffee", href: "https://buymeacoffee.com/ravindupiyumal", color: "bg-amber-400 hover:bg-amber-300 text-slate-900" },
                 ].map((social, index) => (
                   <motion.a
                     key={social.name}
@@ -241,9 +227,16 @@ export default function ContactSection() {
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
-                    className={`${social.color} text-white px-4 py-2 rounded-lg transition-all duration-300`}
+                    className={`${social.color} ${social.name === "Buy me a coffee" ? "" : "text-white"} px-4 py-2 rounded-lg transition-all duration-300 font-medium flex items-center gap-2`}
                   >
-                    {social.name}
+                    {social.name === "Buy me a coffee" ? (
+                      <>
+                        <Coffee className="h-4 w-4" />
+                        <span className="font-['Cookie'] text-lg tracking-wide leading-none">Buy me a coffee</span>
+                      </>
+                    ) : (
+                      social.name
+                    )}
                   </motion.a>
                 ))}
               </div>

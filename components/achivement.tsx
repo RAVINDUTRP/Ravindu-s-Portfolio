@@ -27,7 +27,7 @@ const achievements: Achievement[] = [
     type: "Certificate",
     credentialUrl: "https://code.sliit.org/certificates/6watlhu8tn",
     icon: Award,
-    image: "/assets/achivements/AI:ML.png"
+    image: "/assets/achivements/AI-ML.png"
   },
   {
     title: "AI/ML Engineer - Stage 2",
@@ -36,7 +36,7 @@ const achievements: Achievement[] = [
     type: "Certificate",
     credentialUrl: "https://code.sliit.org/certificates/7hd3rjbj4x",
     icon: Award,
-    image: "/assets/achivements/AI:ML2.png"
+    image: "/assets/achivements/AI-ML2.png"
   },
 
 ]
@@ -132,18 +132,18 @@ export default function AchivementSection() {
             <>
               <button 
                 onClick={scrollLeft}
-                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-20 p-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] hover:bg-white/20 hover:scale-110 transition-all duration-300 hidden md:flex items-center justify-center group"
+                className="absolute left-0 top-[45%] -translate-y-1/2 -translate-x-4 z-20 p-1 rounded-full bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-slate-300 dark:border-slate-600 shadow-lg hover:shadow-2xl hover:shadow-amber-500/30 hover:bg-gradient-to-br hover:from-amber-50 hover:to-orange-50 dark:hover:from-amber-900/40 dark:hover:to-orange-900/40 hover:border-amber-400 dark:hover:border-amber-500 hover:scale-110 transition-all duration-300 ease-out hidden md:flex items-center justify-center group"
                 aria-label="Scroll left"
               >
-                <ChevronLeft className="w-3 h-3 text-slate-700 dark:text-white group-hover:-translate-x-0.5 transition-transform" />
+                <ChevronLeft className="w-3.5 h-3.5 text-slate-700 dark:text-slate-300 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors duration-300" />
               </button>
 
               <button 
                 onClick={scrollRight}
-                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-20 p-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] hover:bg-white/20 hover:scale-110 transition-all duration-300 hidden md:flex items-center justify-center group"
+                className="absolute right-0 top-[45%] -translate-y-1/2 translate-x-4 z-20 p-1 rounded-full bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-slate-300 dark:border-slate-600 shadow-lg hover:shadow-2xl hover:shadow-amber-500/30 hover:bg-gradient-to-br hover:from-amber-50 hover:to-orange-50 dark:hover:from-amber-900/40 dark:hover:to-orange-900/40 hover:border-amber-400 dark:hover:border-amber-500 hover:scale-110 transition-all duration-300 ease-out hidden md:flex items-center justify-center group"
                 aria-label="Scroll right"
               >
-                <ChevronRight className="w-3 h-3 text-slate-700 dark:text-white group-hover:translate-x-0.5 transition-transform" />
+                <ChevronRight className="w-3.5 h-3.5 text-slate-700 dark:text-slate-300 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors duration-300" />
               </button>
             </>
           )}
@@ -153,10 +153,10 @@ export default function AchivementSection() {
             variants={containerVariants}
             className={`flex overflow-x-auto pb-8 gap-8 px-4 snap-x scrollbar-hide ${achievements.length === 1 ? "justify-center" : ""}`}
           >
-          {achievements.map((item, index) => {
-            const Icon = item.icon
-            return (
-              <div key={index} className="inter-var snap-center flex-shrink-0">
+            {achievements.map((item, index) => {
+              const Icon = item.icon
+              return (
+                <div key={index} className="inter-var snap-center flex-shrink-0">
                 <div 
                   onClick={() => setSelectedAchievement(item)}
                   className="bg-gradient-to-br from-white via-slate-50 to-amber-50/40 dark:from-slate-900 dark:via-slate-900/80 dark:to-amber-900/10 relative group/card border-slate-200/80 dark:border-slate-700/80 w-auto sm:w-[24rem] h-auto rounded-xl p-6 border hover:shadow-2xl hover:shadow-amber-500/20 transition-shadow duration-300 cursor-pointer"
@@ -215,8 +215,8 @@ export default function AchivementSection() {
                 </div>
               </div>
             )
-          })}
-        </motion.div>
+            })}
+          </motion.div>
         
         {achievements.length > 1 && (
           <div className="flex justify-center gap-2 mt-6">
@@ -239,7 +239,7 @@ export default function AchivementSection() {
               />
             ))}
           </div>
-        )}
+          )}
         </div>
       </div>
 
@@ -286,7 +286,7 @@ export default function AchivementSection() {
                   </p>
                </motion.div>
             ) : (
-            <motion.div
+              <motion.div
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
@@ -378,7 +378,7 @@ export default function AchivementSection() {
                   )}
                 </div>
               </div>
-            </motion.div>
+              </motion.div>
             )}
           </motion.div>
         )}
