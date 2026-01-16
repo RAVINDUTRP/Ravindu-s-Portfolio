@@ -8,7 +8,6 @@ import { Award, Trophy, GraduationCap, ExternalLink, ChevronLeft, ChevronRight, 
 import { useScrollAnimationFramer } from "@/hooks/use-scroll-animation"
 
 import Animated3DBackground from "@/components/animated-3d-background"
-import ZoomPanImage from "@/components/ui/zoom-pan-image"
 
 type Achievement = {
   title: string
@@ -26,9 +25,18 @@ const achievements: Achievement[] = [
     issuer: "Centre for Open and Distance Education - SLIIT",
     year: "2025",
     type: "Certificate",
-    credentialUrl: "",
+    credentialUrl: "https://code.sliit.org/certificates/6watlhu8tn",
     icon: Award,
     image: "/assets/achivements/AI:ML.png"
+  },
+  {
+    title: "AI/ML Engineer - Stage 2",
+    issuer: "Centre for Open and Distance Education - SLIIT",
+    year: "2026",
+    type: "Certificate",
+    credentialUrl: "https://code.sliit.org/certificates/7hd3rjbj4x",
+    icon: Award,
+    image: "/assets/achivements/AI:ML2.png"
   },
 
 ]
@@ -123,18 +131,18 @@ export default function AchivementSection() {
             <>
               <button 
                 onClick={scrollLeft}
-                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-20 p-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] hover:bg-white/20 hover:scale-110 transition-all duration-300 hidden md:flex items-center justify-center group"
+                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-20 p-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] hover:bg-white/20 hover:scale-110 transition-all duration-300 hidden md:flex items-center justify-center group"
                 aria-label="Scroll left"
               >
-                <ChevronLeft className="w-6 h-6 text-slate-700 dark:text-white group-hover:-translate-x-0.5 transition-transform" />
+                <ChevronLeft className="w-4 h-4 text-slate-700 dark:text-white group-hover:-translate-x-0.5 transition-transform" />
               </button>
 
               <button 
                 onClick={scrollRight}
-                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-20 p-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] hover:bg-white/20 hover:scale-110 transition-all duration-300 hidden md:flex items-center justify-center group"
+                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-20 p-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] hover:bg-white/20 hover:scale-110 transition-all duration-300 hidden md:flex items-center justify-center group"
                 aria-label="Scroll right"
               >
-                <ChevronRight className="w-6 h-6 text-slate-700 dark:text-white group-hover:translate-x-0.5 transition-transform" />
+                <ChevronRight className="w-4 h-4 text-slate-700 dark:text-white group-hover:translate-x-0.5 transition-transform" />
               </button>
             </>
           )}
