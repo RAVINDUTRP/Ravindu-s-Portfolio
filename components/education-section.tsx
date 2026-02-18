@@ -69,35 +69,21 @@ export default function EducationSection() {
 
   const experienceData = [
     {
-      position: "Junior Full Stack Developer",
-      company: "Tech Solutions Inc.",
+      position: "Software Engineer Intern",
+      company: "Sri Lanka Telecom (SLT)",
       location: "Colombo, Sri Lanka",
-      period: "2024 - Present",
+      period: "2026 - Present",
       responsibilities: [
-        "Developed and maintained responsive web applications using React and Node.js",
-        "Collaborated with design team to implement UI/UX improvements",
-        "Optimized database queries improving performance by 30%",
+        "Developed and maintained responsive web applications using React and .net core",
+        "Collaborated with cross-functional teams to deliver high-quality software solutions",
+        "Using AI tools to improve the quality of the code and Develop AI-powered features to enhance user experience",
         "Participated in code reviews and contributed to technical documentation"
       ],
       color: "from-blue-600 to-blue-400",
-      link: "https://techsolutions.com",
-      logo: "/assets/pro-images/tech-solutions.png"
+      link: "https://slt.lk/en/home",
+      logo: "/assets/exp-images/slt.jpg"
     },
-    {
-      position: "Web Development Intern",
-      company: "Digital Agency XYZ",
-      location: "Colombo, Sri Lanka",
-      period: "2023 - 2024",
-      responsibilities: [
-        "Created responsive landing pages using HTML, CSS, and JavaScript",
-        "Assisted in website maintenance and bug fixes",
-        "Learned best practices for web development and deployment",
-        "Supported senior developers in various project phases"
-      ],
-      color: "from-purple-600 to-purple-400",
-      link: "https://digitalagencyxyz.com",
-      logo: "/assets/pro-images/digital-agency.png"
-    },
+
   ]
 
   const containerVariants = {
