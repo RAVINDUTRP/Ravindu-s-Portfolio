@@ -1,6 +1,6 @@
 "use client"
 
-import { GraduationCap, Calendar, MapPin, Check } from "lucide-react"
+import { GraduationCap, Briefcase, Calendar, MapPin, Check } from "lucide-react"
 import { motion } from "framer-motion"
 import { useScrollAnimationFramer } from "@/hooks/use-scroll-animation"
 import { useState, useRef, useEffect } from "react"
@@ -12,6 +12,7 @@ import { useIsMobile } from "@/components/ui/use-mobile";
 export default function EducationSection() {
   const { ref, isInView } = useScrollAnimationFramer()
   const [openIdx, setOpenIdx] = useState<number | null>(null)
+  const [activeTab, setActiveTab] = useState<'education' | 'experience'>('education')
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [isScrolling, setIsScrolling] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -63,6 +64,39 @@ export default function EducationSection() {
       color: "from-gray-600 to-gray-400",
       link: " ",
       logo: "/assets/edu-images/sripalee.jpeg"
+    },
+  ]
+
+  const experienceData = [
+    {
+      position: "Junior Full Stack Developer",
+      company: "Tech Solutions Inc.",
+      location: "Colombo, Sri Lanka",
+      period: "2024 - Present",
+      responsibilities: [
+        "Developed and maintained responsive web applications using React and Node.js",
+        "Collaborated with design team to implement UI/UX improvements",
+        "Optimized database queries improving performance by 30%",
+        "Participated in code reviews and contributed to technical documentation"
+      ],
+      color: "from-blue-600 to-blue-400",
+      link: "https://techsolutions.com",
+      logo: "/assets/pro-images/tech-solutions.png"
+    },
+    {
+      position: "Web Development Intern",
+      company: "Digital Agency XYZ",
+      location: "Colombo, Sri Lanka",
+      period: "2023 - 2024",
+      responsibilities: [
+        "Created responsive landing pages using HTML, CSS, and JavaScript",
+        "Assisted in website maintenance and bug fixes",
+        "Learned best practices for web development and deployment",
+        "Supported senior developers in various project phases"
+      ],
+      color: "from-purple-600 to-purple-400",
+      link: "https://digitalagencyxyz.com",
+      logo: "/assets/pro-images/digital-agency.png"
     },
   ]
 
@@ -189,8 +223,44 @@ export default function EducationSection() {
         className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
       >
         <motion.div ref={headingRef} variants={itemVariants} className="text-center mb-12">
-          <h2 className="text-5xl font-extrabold text-gray-900 dark:text-white mb-4">Education</h2>
-          <p className="text-lg text-gray-600 dark:text-gray-400">My academic journey and achievements</p>
+          <h2 className="text-5xl font-extrabold text-gray-900 dark:text-white mb-4">
+            {activeTab === 'education' ? 'Education' : 'Experience'}
+          </h2>
+          <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">
+            {activeTab === 'education' ? 'My academic journey and achievements' : 'My professional journey and experience'}
+          </p>
+          
+          {/* Tab Buttons */}
+          <div className="flex justify-center gap-4 mb-8">
+            <button
+              onClick={() => {
+                setActiveTab('education')
+                setOpenIdx(null)
+              }}
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-sm transition-all duration-300 transform hover:scale-105 ${
+                activeTab === 'education'
+                  ? 'bg-gradient-to-r from-blue-600 to-blue-500 dark:from-blue-500 dark:to-blue-400 text-white shadow-lg shadow-blue-500/50 dark:shadow-blue-400/30 border border-blue-400/50'
+                  : 'bg-gradient-to-r from-gray-700 to-gray-800 dark:from-gray-600 dark:to-gray-700 text-gray-300 dark:text-gray-400 hover:shadow-lg shadow-gray-900/50 border border-gray-600/50 hover:from-gray-600 hover:to-gray-700'
+              }`}
+            >
+              <GraduationCap className="w-4 h-4" />
+              Education
+            </button>
+            <button
+              onClick={() => {
+                setActiveTab('experience')
+                setOpenIdx(null)
+              }}
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-sm transition-all duration-300 transform hover:scale-105 ${
+                activeTab === 'experience'
+                  ? 'bg-gradient-to-r from-blue-600 to-blue-500 dark:from-blue-500 dark:to-blue-400 text-white shadow-lg shadow-blue-500/50 dark:shadow-blue-400/30 border border-blue-400/50'
+                  : 'bg-gradient-to-r from-gray-700 to-gray-800 dark:from-gray-600 dark:to-gray-700 text-gray-300 dark:text-gray-400 hover:shadow-lg shadow-gray-900/50 border border-gray-600/50 hover:from-gray-600 hover:to-gray-700'
+              }`}
+            >
+              <Briefcase className="w-4 h-4" />
+              Experience
+            </button>
+          </div>
         </motion.div>
         <div className="relative">
           {/* Timeline vertical line */}
@@ -203,7 +273,7 @@ export default function EducationSection() {
           )}
           {/* Timeline cards */}
           <div className={isMobile ? "flex flex-col gap-8 items-center w-full" : "space-y-16"}>
-            {educationData.map((edu, idx) => (
+            {(activeTab === 'education' ? educationData : experienceData).map((item, idx) => (
               <motion.div
                 key={idx}
                 ref={el => { cardRefs.current[idx] = el; }}
@@ -232,7 +302,11 @@ export default function EducationSection() {
                   openIdx === idx ? null : (
                     <div className="flex justify-center -mt-8 mb-2">
                       <span className="w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-r from-blue-400 to-purple-400 shadow-lg border-4 border-white dark:border-gray-800">
-                        <GraduationCap className="w-6 h-6 text-white" />
+                        {activeTab === 'education' ? (
+                          <GraduationCap className="w-6 h-6 text-white" />
+                        ) : (
+                          <Briefcase className="w-6 h-6 text-white" />
+                        )}
                       </span>
                     </div>
                   )
@@ -241,7 +315,11 @@ export default function EducationSection() {
                     variants={dotVariants}
                     className="absolute left-1/2 top-1/2 w-8 h-8 flex items-center justify-center p-0 rounded-full bg-gradient-to-r from-blue-400 to-purple-400 border-4 border-white dark:border-gray-800 z-10 shadow-lg transform -translate-x-1/2 -translate-y-1/2"
                   >
-                    <GraduationCap className="w-5 h-5 text-white m-0 p-0" style={{ display: 'block' }} />
+                    {activeTab === 'education' ? (
+                      <GraduationCap className="w-5 h-5 text-white m-0 p-0" style={{ display: 'block' }} />
+                    ) : (
+                      <Briefcase className="w-5 h-5 text-white m-0 p-0" style={{ display: 'block' }} />
+                    )}
                   </motion.span>
                 )}
                 {/* Card: show logo box or details box, never both */}
@@ -255,151 +333,199 @@ export default function EducationSection() {
                       exit={{ opacity: 0, height: 0 }}
                     transition={{ opacity: { duration: 0.4, ease: 'easeInOut' }, height: { duration: 0.5, ease: 'easeInOut' } }}
                   >
-                    {/* Custom rendering for A/L & O/L combined card */}
-                    {edu.degree.includes('A/L') && edu.al && edu.ol ? (
-                        <div className="border-4 border-blue-200 dark:border-blue-600 rounded-2xl shadow-xl shadow-blue-100 dark:shadow-blue-900 p-8 bg-white/90 dark:bg-gray-800">
+                    {activeTab === 'education' ? (
+                      // EDUCATION CARD RENDERING
+                      <>
+                        {/* Custom rendering for A/L & O/L combined card */}
+                        {'degree' in item && item.degree && item.degree.includes('A/L') && 'al' in item && item.al && 'ol' in item && item.ol ? (
+                            <div className="border-4 border-blue-200 dark:border-blue-600 rounded-2xl shadow-xl shadow-blue-100 dark:shadow-blue-900 p-8 bg-white/90 dark:bg-gray-800">
+                            <div className="flex justify-center -mt-16 mb-4">
+                              <img
+                                src={item.logo}
+                                alt="Logo"
+                                className="w-16 h-16 object-cover rounded-full shadow-lg border-4 border-white dark:border-gray-800 bg-white"
+                                style={{ zIndex: 20, background: 'white', objectFit: 'contain' }}
+                              />
+                            </div>
+                            <div className="space-y-4">
+                              {/* A/L Section */}
+                              <div className="py-2 space-y-4">
+                                <div className="text-xl font-bold text-gray-900 dark:text-white mb-1">
+                                  G.C.E. Advanced Level (A/L)
+                                </div>
+                                <div className="flex justify-start mb-2">
+                                  <span className="inline-flex items-center bg-green-500 text-white text-[10px] font-semibold px-1.5 py-0.5 rounded-full">
+                                    Pass
+                                  </span>
+                                </div>
+                                <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 mb-2">
+                                  <Calendar className="w-4 h-4" />
+                                  <span>{('al' in item && item.al) ? item.al.period : ''}</span>
+                                </div>
+                                <div className="flex flex-wrap gap-2 mb-2">
+                                  {('al' in item && item.al) && item.al.subjects.map((subject: string, i: number) => (
+                                    <Badge
+                                      key={i}
+                                      variant="secondary"
+                                      className="rounded-full text-[10px] px-3 py-1 font-medium bg-blue-100 dark:bg-blue-900 border border-blue-200 dark:border-blue-700 shadow-sm text-blue-800 dark:text-blue-100"
+                                    >
+                                      {subject}
+                                    </Badge>
+                                  ))}
+                                </div>
+                              </div>
+                              <hr className="my-3 border-gray-300 dark:border-gray-700" />
+                              {/* O/L Section */}
+                              <div className="py-2 space-y-4 mt-12">
+                                <div className="text-xl font-bold text-gray-900 dark:text-white mb-1">
+                                  G.C.E. Ordinary Level (O/L)
+                                </div>
+                                <div className="flex justify-start mb-2">
+                                  <span className="inline-flex items-center bg-green-500 text-white text-[10px] font-semibold px-1.5 py-0.5 rounded-full">
+                                    Pass
+                                  </span>
+                                </div>
+                                <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 mb-2">
+                                  <Calendar className="w-4 h-4" />
+                                  <span>{('ol' in item && item.ol) ? item.ol.period : ''}</span>
+                                </div>
+                                <div className="flex flex-wrap gap-2 mb-2 min-h-[24px]">
+                                  {('ol' in item && item.ol) && item.ol.subjects.length > 0 ? (
+                                    item.ol.subjects.map((subject: string, i: number) => (
+                                      <Badge
+                                        key={i}
+                                        variant="secondary"
+                                        className="rounded-full text-[10px] px-3 py-1 font-medium bg-purple-100 dark:bg-purple-900 border border-purple-200 dark:border-purple-700 shadow-sm text-purple-800 dark:text-purple-100"
+                                      >
+                                        {subject}
+                                      </Badge>
+                                    ))
+                                  ) : (
+                                    <span className="inline-block" style={{ minWidth: '1em' }}>&nbsp;</span>
+                                  )}
+                                </div>
+                              </div>
+                              {/* School name and location */}
+                              <div className="pt-2 border-t border-gray-200 dark:border-gray-700 mt-2 text-center">
+                                {'institution' in item && ('institution' in item && item.institution.includes('Sripalee')) ? (
+                                  <div 
+                                    className="text-lg font-semibold" 
+                                    style={{ color: resolvedTheme === 'dark' ? '#60a5fa' : '#2563eb' }}
+                                  >
+                                    {item.institution}
+                                  </div>
+                                ) : (
+                                  <a
+                                    href={item.link}
+                                    className="text-lg font-semibold text-blue-600 dark:text-blue-400 hover:underline"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                  >
+                                    {'institution' in item ? item.institution : ''}
+                                  </a>
+                                )}
+                                <div className="flex items-center justify-center gap-2 text-sm text-gray-600 dark:text-gray-400 mt-1">
+                                  <MapPin className="w-4 h-4" />
+                                  <span>{item.location}</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        ) : (
+                            <div className="border-4 border-blue-200 dark:border-blue-600 rounded-2xl shadow-xl shadow-blue-100 dark:shadow-blue-900 p-8 bg-white/90 dark:bg-gray-800">
+                            {/* Small logo icon at top center */}
+                            <div className="flex justify-center -mt-16 mb-4">
+                              <img
+                                src={item.logo}
+                                alt="Logo"
+                                className={`w-16 h-16 object-cover rounded-full shadow-lg border-4 border-white dark:border-gray-800 bg-white ${'institution' in item && item.institution && item.institution.includes('SLIIT') ? 'p-1 bg-white' : ''}`}
+                                style={'institution' in item && item.institution && item.institution.includes('SLIIT') ? { zIndex: 20, background: 'white', objectFit: 'contain' } : { zIndex: 20 }}
+                              />
+                            </div>
+                            <div className="space-y-4">
+                              <div className="text-2xl font-bold text-gray-900 dark:text-white">
+                                {'degree' in item ? item.degree : ''}
+                              </div>
+                              {'institution' in item && item.institution && item.institution.includes('Sripalee') ? (
+                                <div 
+                                  className="text-lg font-semibold" 
+                                  style={{ color: resolvedTheme === 'dark' ? '#60a5fa' : '#2563eb' }}
+                                >
+                                  {item.institution}
+                                </div>
+                              ) : (
+                                <a href={item.link} className="text-lg font-semibold text-blue-600 dark:text-blue-400 hover:underline block" target="_blank" rel="noopener noreferrer">
+                                  {'institution' in item ? item.institution : ''}
+                                </a>
+                              )}
+                              <div className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                                <div className="flex items-center gap-2">
+                                  <Calendar className="w-5 h-5" />
+                                  <span>{item.period}</span>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                  <MapPin className="w-5 h-5" />
+                                  <span>{item.location}</span>
+                                </div>
+                              </div>
+                              {/* Show keyAreas as badges for SLIIT card only */}
+                              {'institution' in item && item.institution && item.institution.includes('SLIIT') && 'keyAreas' in item && item.keyAreas && item.keyAreas.length > 0 && (
+                                <div className="text-gray-700 dark:text-gray-300 pt-2 border-t border-gray-200 dark:border-gray-700 flex flex-wrap gap-2 mt-2">
+                                  {item.keyAreas.map((area: string, i: number) => (
+                                    <Badge
+                                      key={i}
+                                      variant="secondary"
+                                      className="rounded-full text-[10px] px-3 py-1 font-medium bg-blue-100 dark:bg-blue-900 border border-blue-200 dark:border-blue-700 shadow-sm text-blue-800 dark:text-blue-100"
+                                    >
+                                      {area}
+                                    </Badge>
+                                  ))}
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        )}
+                      </>
+                    ) : (
+                      // EXPERIENCE CARD RENDERING
+                      <div className="border-4 border-blue-200 dark:border-blue-600 rounded-2xl shadow-xl shadow-blue-100 dark:shadow-blue-900 p-8 bg-white/90 dark:bg-gray-800">
                         {/* Small logo icon at top center */}
                         <div className="flex justify-center -mt-16 mb-4">
                           <img
-                            src={edu.logo}
+                            src={item.logo}
                             alt="Logo"
                             className="w-16 h-16 object-cover rounded-full shadow-lg border-4 border-white dark:border-gray-800 bg-white"
                             style={{ zIndex: 20, background: 'white', objectFit: 'contain' }}
                           />
                         </div>
                         <div className="space-y-4">
-                          {/* A/L Section */}
-                          <div className="py-2 space-y-4">
-                            <div className="text-xl font-bold text-gray-900 dark:text-white mb-1">
-                              G.C.E. Advanced Level (A/L)
-                            </div>
-                            <div className="flex justify-start mb-2">
-                              <span className="inline-flex items-center bg-green-500 text-white text-[10px] font-semibold px-1.5 py-0.5 rounded-full">
-                                Pass
-                              </span>
-                            </div>
-                            <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 mb-2">
-                              <Calendar className="w-4 h-4" />
-                              <span>{edu.al.period}</span>
-                            </div>
-                            <div className="flex flex-wrap gap-2 mb-2">
-                              {edu.al.subjects.map((subject: string, i: number) => (
-                                <Badge
-                                  key={i}
-                                  variant="secondary"
-                                  className="rounded-full text-[10px] px-3 py-1 font-medium bg-blue-100 dark:bg-blue-900 border border-blue-200 dark:border-blue-700 shadow-sm text-blue-800 dark:text-blue-100"
-                                >
-                                  {subject}
-                                </Badge>
-                              ))}
-                            </div>
-                          </div>
-                          <hr className="my-3 border-gray-300 dark:border-gray-700" />
-                          {/* O/L Section */}
-                          <div className="py-2 space-y-4 mt-12">
-                            <div className="text-xl font-bold text-gray-900 dark:text-white mb-1">
-                              G.C.E. Ordinary Level (O/L)
-                            </div>
-                            <div className="flex justify-start mb-2">
-                              <span className="inline-flex items-center bg-green-500 text-white text-[10px] font-semibold px-1.5 py-0.5 rounded-full">
-                                Pass
-                              </span>
-                            </div>
-                            <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 mb-2">
-                              <Calendar className="w-4 h-4" />
-                              <span>{edu.ol.period}</span>
-                            </div>
-                            <div className="flex flex-wrap gap-2 mb-2 min-h-[24px]">
-                              {edu.ol.subjects.length > 0 ? (
-                                edu.ol.subjects.map((subject: string, i: number) => (
-                                  <Badge
-                                    key={i}
-                                    variant="secondary"
-                                    className="rounded-full text-[10px] px-3 py-1 font-medium bg-purple-100 dark:bg-purple-900 border border-purple-200 dark:border-purple-700 shadow-sm text-purple-800 dark:text-purple-100"
-                                  >
-                                    {subject}
-                                  </Badge>
-                                ))
-                              ) : (
-                                <span className="inline-block" style={{ minWidth: '1em' }}>&nbsp;</span>
-                              )}
-                            </div>
-                          </div>
-                          {/* School name and location */}
-                          <div className="pt-2 border-t border-gray-200 dark:border-gray-700 mt-2 text-center">
-                            {edu.institution.includes('Sripalee') ? (
-                              <div 
-                                className="text-lg font-semibold" 
-                                style={{ color: resolvedTheme === 'dark' ? '#60a5fa' : '#2563eb' }}
-                              >
-                                {edu.institution}
-                              </div>
-                            ) : (
-                              <a
-                                href={edu.link}
-                                className="text-lg font-semibold text-blue-600 dark:text-blue-400 hover:underline"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                              >
-                                {edu.institution}
-                              </a>
-                            )}
-                            <div className="flex items-center justify-center gap-2 text-sm text-gray-600 dark:text-gray-400 mt-1">
-                              <MapPin className="w-4 h-4" />
-                              <span>{edu.location}</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    ) : (
-                        <div className="border-4 border-blue-200 dark:border-blue-600 rounded-2xl shadow-xl shadow-blue-100 dark:shadow-blue-900 p-8 bg-white/90 dark:bg-gray-800">
-                        {/* Small logo icon at top center */}
-                        <div className="flex justify-center -mt-16 mb-4">
-                          <img
-                            src={edu.logo}
-                            alt="Logo"
-                            className={`w-16 h-16 object-cover rounded-full shadow-lg border-4 border-white dark:border-gray-800 bg-white ${edu.institution.includes('SLIIT') ? 'p-1 bg-white' : ''}`}
-                            style={edu.institution.includes('SLIIT') ? { zIndex: 20, background: 'white', objectFit: 'contain' } : { zIndex: 20 }}
-                          />
-                        </div>
-                        <div className="space-y-4">
                           <div className="text-2xl font-bold text-gray-900 dark:text-white">
-                            {edu.degree}
+                            {'position' in item ? item.position : ''}
                           </div>
-                          {edu.institution.includes('Sripalee') ? (
-                            <div 
-                              className="text-lg font-semibold" 
-                              style={{ color: resolvedTheme === 'dark' ? '#60a5fa' : '#2563eb' }}
-                            >
-                              {edu.institution}
-                            </div>
-                          ) : (
-                            <a href={edu.link} className="text-lg font-semibold text-blue-600 dark:text-blue-400 hover:underline block" target="_blank" rel="noopener noreferrer">
-                              {edu.institution}
-                            </a>
-                          )}
+                          <a href={item.link} className="text-lg font-semibold text-blue-600 dark:text-blue-400 hover:underline block" target="_blank" rel="noopener noreferrer">
+                            {'company' in item ? item.company : ''}
+                          </a>
                           <div className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
                             <div className="flex items-center gap-2">
                               <Calendar className="w-5 h-5" />
-                              <span>{edu.period}</span>
+                              <span>{item.period}</span>
                             </div>
                             <div className="flex items-center gap-2">
                               <MapPin className="w-5 h-5" />
-                              <span>{edu.location}</span>
+                              <span>{item.location}</span>
                             </div>
                           </div>
-                          {/* Show keyAreas as badges for SLIIT card only */}
-                          {edu.institution.includes('SLIIT') && edu.keyAreas && edu.keyAreas.length > 0 && (
-                            <div className="text-gray-700 dark:text-gray-300 pt-2 border-t border-gray-200 dark:border-gray-700 flex flex-wrap gap-2 mt-2">
-                              {edu.keyAreas.map((area: string, i: number) => (
-                                <Badge
-                                  key={i}
-                                  variant="secondary"
-                                  className="rounded-full text-[10px] px-3 py-1 font-medium bg-blue-100 dark:bg-blue-900 border border-blue-200 dark:border-blue-700 shadow-sm text-blue-800 dark:text-blue-100"
-                                >
-                                  {area}
-                                </Badge>
-                              ))}
+                          {/* Show responsibilities as list */}
+                          {'responsibilities' in item && item.responsibilities && item.responsibilities.length > 0 && (
+                            <div className="text-gray-700 dark:text-gray-300 pt-2 border-t border-gray-200 dark:border-gray-700 mt-2">
+                              <ul className="space-y-2">
+                                {item.responsibilities.map((responsibility: string, i: number) => (
+                                  <li key={i} className="flex gap-2 text-sm">
+                                    <Check className="w-4 h-4 flex-shrink-0 text-green-500 mt-0.5" />
+                                    <span>{responsibility}</span>
+                                  </li>
+                                ))}
+                              </ul>
                             </div>
                           )}
                         </div>
@@ -415,7 +541,7 @@ export default function EducationSection() {
                     >
                       <div className="flex items-center justify-center border-4 border-blue-200 dark:border-blue-600 rounded-2xl shadow-lg p-1 bg-white/80 dark:bg-white transition-transform duration-300 hover:scale-105 hover:shadow-2xl w-52 h-52 mx-auto">
                         <img
-                          src={edu.logo}
+                          src={item.logo}
                           alt="Logo"
                           className="w-40 h-40 object-cover rounded-xl"
                           onClick={isMobile ? () => setOpenIdx(idx) : undefined}
