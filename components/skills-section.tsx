@@ -210,18 +210,23 @@ export default function SkillsSection() {
               )}
               <button
                 type="button"
-                className="w-full max-w-xs flex items-center justify-between rounded-full px-5 py-2 text-base font-semibold bg-card text-foreground border border-border shadow focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all z-30"
+                className="w-full max-w-sm flex items-center justify-between rounded-2xl px-4 py-3 text-base bg-white/85 dark:bg-slate-900/80 text-foreground border border-slate-200/80 dark:border-slate-700/80 shadow-lg backdrop-blur-md focus:outline-none focus:ring-2 focus:ring-blue-400/70 transition-all z-30"
                 onClick={() => setDropdownOpen((open) => !open)}
               >
-                {CATEGORIES.find(c => c.value === activeTab)?.label || 'Select'}
-                <ChevronDown className={`ml-2 h-5 w-5 transition-transform ${dropdownOpen ? 'rotate-180' : ''}`} />
+                <div className="flex flex-col items-start">
+                  <span className="text-[11px] uppercase tracking-wider text-muted-foreground">Category</span>
+                  <span className="font-semibold">{CATEGORIES.find(c => c.value === activeTab)?.label || 'Select'}</span>
+                </div>
+                <span className="ml-3 inline-flex h-8 w-8 items-center justify-center rounded-full bg-blue-50 dark:bg-slate-800 border border-blue-100 dark:border-slate-700">
+                  <ChevronDown className={`h-5 w-5 text-blue-600 dark:text-blue-400 transition-transform duration-300 ${dropdownOpen ? 'rotate-180' : ''}`} />
+                </span>
               </button>
               {dropdownOpen && (
-                <div className="absolute top-full mt-2 w-full max-w-xs bg-card border border-border rounded-xl shadow-lg z-30 animate-fade-in">
+                <div className="absolute top-full mt-3 w-full max-w-sm bg-white/90 dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-700/80 rounded-2xl shadow-xl backdrop-blur-md z-30 animate-fade-in p-2">
                   {CATEGORIES.map((cat) => (
                     <button
                       key={cat.value}
-                      className={`w-full text-left px-5 py-2 text-base font-medium rounded-lg transition-colors ${activeTab === cat.value ? 'bg-gradient-to-r from-blue-500 to-sky-400 text-white' : 'hover:bg-muted text-foreground'}`}
+                      className={`w-full text-left px-4 py-2.5 text-base font-medium rounded-xl transition-all ${activeTab === cat.value ? 'bg-gradient-to-r from-blue-500 to-sky-400 text-white shadow-md' : 'hover:bg-slate-100 dark:hover:bg-slate-800 text-foreground'}`}
                       onClick={() => { handleTabChange(cat.value); setDropdownOpen(false); }}
                     >
                       {cat.label}
