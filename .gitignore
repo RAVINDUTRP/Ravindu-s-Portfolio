@@ -1,20 +1,55 @@
+# Dependencies
 node_modules/
+.pnp
+.pnp.js
+
+# Next.js build output
 .next/
 out/
-.env*
-.DS_Store
-*.log
-coverage/
+.swc/
+
+# Production
+dist/
+build/
+
+# Deployment
 .vercel
+.netlify/
+.turbo/
+
+# Environment variables
+.env*
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Editor/IDE
 .idea
 .vscode
-*.local
+.DS_Store
+Icon
+*.swp
+*.swo
+
+# Build/Test
+coverage/
 *.tsbuildinfo
-**/*.local
-# build artifacts
 dist/
-# lockfiles
-package-lock.json
-yarn.lock
-pnpm-lock.yaml
+
+# Lockfiles (optional - uncomment if desired)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# Misc
+.cache
+**/.cache/
+**/*.local
 
