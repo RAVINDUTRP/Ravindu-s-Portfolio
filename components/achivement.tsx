@@ -3,7 +3,7 @@
 import { useRef, useState } from "react"
 import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
-import { Award, Trophy, GraduationCap, ExternalLink, ChevronLeft, ChevronRight, X } from "lucide-react"
+import { Award, Trophy, GraduationCap, ExternalLink, X } from "lucide-react"
 
 import { useScrollAnimationFramer } from "@/hooks/use-scroll-animation"
 
@@ -105,18 +105,6 @@ export default function AchivementSection() {
   const certificates = achievements.filter((item) => item.type.toLowerCase() === "certificate")
   const badges = achievements.filter((item) => item.type.toLowerCase() === "badge")
   const filteredAchievements = activeCategory === "Certificates" ? certificates : badges
-
-  const scrollLeft = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({ left: -300, behavior: "smooth" })
-    }
-  }
-
-  const scrollRight = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({ left: 300, behavior: "smooth" })
-    }
-  }
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -250,26 +238,6 @@ export default function AchivementSection() {
         </motion.div>
 
         <div className="relative">
-          {filteredAchievements.length > 1 && (
-            <>
-              <button 
-                onClick={scrollLeft}
-                className="absolute left-0 top-[45%] -translate-y-1/2 -translate-x-4 z-20 p-1 rounded-full bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-slate-300 dark:border-slate-600 shadow-lg hover:shadow-2xl hover:shadow-amber-500/30 hover:bg-gradient-to-br hover:from-amber-50 hover:to-orange-50 dark:hover:from-amber-900/40 dark:hover:to-orange-900/40 hover:border-amber-400 dark:hover:border-amber-500 hover:scale-110 transition-all duration-300 ease-out hidden md:flex items-center justify-center group"
-                aria-label="Scroll left"
-              >
-                <ChevronLeft className="w-3.5 h-3.5 text-slate-700 dark:text-slate-300 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors duration-300" />
-              </button>
-
-              <button 
-                onClick={scrollRight}
-                className="absolute right-0 top-[45%] -translate-y-1/2 translate-x-4 z-20 p-1 rounded-full bg-white/90 dark:bg-slate-800/90 backdrop-blur-md border border-slate-300 dark:border-slate-600 shadow-lg hover:shadow-2xl hover:shadow-amber-500/30 hover:bg-gradient-to-br hover:from-amber-50 hover:to-orange-50 dark:hover:from-amber-900/40 dark:hover:to-orange-900/40 hover:border-amber-400 dark:hover:border-amber-500 hover:scale-110 transition-all duration-300 ease-out hidden md:flex items-center justify-center group"
-                aria-label="Scroll right"
-              >
-                <ChevronRight className="w-3.5 h-3.5 text-slate-700 dark:text-slate-300 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors duration-300" />
-              </button>
-            </>
-          )}
-
           <motion.div
             ref={scrollContainerRef}
             variants={containerVariants}
@@ -372,9 +340,16 @@ export default function AchivementSection() {
             )
             })}
           </motion.div>
+
+          {activeCategory === "Certificates" && filteredAchievements.length > 1 && (
+            <>
+              <div className="pointer-events-none absolute left-0 top-0 bottom-10 w-10 bg-gradient-to-r from-slate-200/90 to-transparent dark:from-[#0b1022]/80" />
+              <div className="pointer-events-none absolute right-0 top-0 bottom-10 w-10 bg-gradient-to-l from-slate-200/90 to-transparent dark:from-[#0b1022]/80" />
+            </>
+          )}
         
         {filteredAchievements.length > 1 && (
-          <div className="flex justify-center gap-2 mt-6">
+          <div className="flex justify-center gap-2 mt-4">
             {filteredAchievements.map((_, index) => (
               <button
                 key={index}
@@ -387,8 +362,8 @@ export default function AchivementSection() {
                 }}
                 className={`transition-all duration-300 rounded-full ${
                   index === currentIndex
-                    ? "w-8 h-2 bg-amber-500 dark:bg-amber-400"
-                    : "w-2 h-2 bg-slate-300 dark:bg-slate-600 hover:bg-amber-300 dark:hover:bg-amber-600"
+                    ? "w-8 h-2.5 bg-gradient-to-r from-amber-400 to-orange-400 shadow-md shadow-amber-500/30"
+                    : "w-2.5 h-2.5 bg-slate-400/70 dark:bg-slate-600 hover:bg-amber-300 dark:hover:bg-amber-600"
                 }`}
                 aria-label={`Go to achievement ${index + 1}`}
               />
