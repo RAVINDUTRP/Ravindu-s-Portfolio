@@ -11,34 +11,25 @@ import { useIsMobile } from "./ui/use-mobile";
 import { ChevronDown } from "lucide-react";
 
 const SKILLS = [
-  { name: "C", icon: <Code2 className="w-8 h-8 text-white" />, subtitle: "Programming Language", iconBg: "bg-gradient-to-br from-blue-400 to-blue-700", glow: "shadow-[0_4px_32px_0_rgba(59,130,246,0.4)]", border: "border-blue-400", bgHover: "hover:bg-blue-900/40" },
-  { name: "C++", icon: <Code2 className="w-8 h-8 text-white" />, subtitle: "Programming Language", iconBg: "bg-gradient-to-br from-blue-500 to-blue-800", glow: "shadow-[0_4px_32px_0_rgba(37,99,235,0.4)]", border: "border-blue-500", bgHover: "hover:bg-blue-900/40" },
-  { name: "HTML5", icon: <FileCode className="w-8 h-8 text-white" />, subtitle: "Markup Language", iconBg: "bg-gradient-to-br from-orange-400 to-pink-500", glow: "shadow-[0_4px_32px_0_rgba(251,191,36,0.4)]", border: "border-orange-400", bgHover: "hover:bg-orange-900/40" },
-  { name: "CSS", icon: <Palette className="w-8 h-8 text-white" />, subtitle: "Style Sheet Language", iconBg: "bg-gradient-to-br from-blue-400 to-blue-600", glow: "shadow-[0_4px_32px_0_rgba(59,130,246,0.4)]", border: "border-blue-400", bgHover: "hover:bg-blue-900/40" },
+
   { name: "JavaScript", icon: <FileCode2 className="w-8 h-8 text-white" />, subtitle: "Programming Language", iconBg: "bg-gradient-to-br from-yellow-400 to-yellow-600", glow: "shadow-[0_4px_32px_0_rgba(250,204,21,0.4)]", border: "border-yellow-400", bgHover: "hover:bg-yellow-900/40" },
-  { name: "PHP", icon: <Braces className="w-8 h-8 text-white" />, subtitle: "Programming Language", iconBg: "bg-gradient-to-br from-indigo-400 to-indigo-700", glow: "shadow-[0_4px_32px_0_rgba(99,102,241,0.4)]", border: "border-indigo-400", bgHover: "hover:bg-indigo-900/40" },
-  { name: "SQL Database", icon: <Database className="w-8 h-8 text-white" />, subtitle: "Database", iconBg: "bg-gradient-to-br from-blue-900 to-blue-400", glow: "shadow-[0_4px_32px_0_rgba(30,64,175,0.4)]", border: "border-blue-900", bgHover: "hover:bg-blue-900/40" },
-  { name: "Java", icon: <Coffee className="w-8 h-8 text-white" />, subtitle: "Programming Language", iconBg: "bg-gradient-to-br from-red-400 to-orange-600", glow: "shadow-[0_4px_32px_0_rgba(251,113,133,0.4)]", border: "border-red-400", bgHover: "hover:bg-red-900/40" },
+
   { name: "MySQL", icon: <DatabaseZap className="w-8 h-8 text-white" />, subtitle: "Database", iconBg: "bg-gradient-to-br from-blue-400 to-blue-700", glow: "shadow-[0_4px_32px_0_rgba(59,130,246,0.4)]", border: "border-blue-400", bgHover: "hover:bg-blue-900/40" },
+
   { name: "MongoDB", icon: <Leaf className="w-8 h-8 text-white" />, subtitle: "Database", iconBg: "bg-gradient-to-br from-green-500 to-green-700", glow: "shadow-[0_4px_32px_0_rgba(16,185,129,0.4)]", border: "border-green-500", bgHover: "hover:bg-green-900/40" },
+
+  { name: "Spring Boot", icon: <Server className="w-8 h-8 text-white" />, subtitle: "Framework", iconBg: "bg-gradient-to-br from-green-500 to-lime-600", glow: "shadow-[0_4px_32px_0_rgba(101,163,13,0.4)]", border: "border-lime-500", bgHover: "hover:bg-lime-900/40" },
+
   { name: "Express.js", icon: <Route className="w-8 h-8 text-white" />, subtitle: "Framework", iconBg: "bg-gradient-to-br from-gray-700 to-black", glow: "shadow-[0_4px_32px_0_rgba(55,65,81,0.4)]", border: "border-gray-700", bgHover: "hover:bg-gray-900/40" },
+
   { name: "React", icon: <Atom className="w-8 h-8 text-white" />, subtitle: "Library", iconBg: "bg-gradient-to-br from-sky-400 to-blue-500", glow: "shadow-[0_4px_32px_0_rgba(56,189,248,0.4)]", border: "border-sky-400", bgHover: "hover:bg-sky-900/40" },
+
   { name: "Node.js", icon: <Hexagon className="w-8 h-8 text-white" />, subtitle: "Runtime", iconBg: "bg-gradient-to-br from-green-400 to-emerald-500", glow: "shadow-[0_4px_32px_0_rgba(34,197,94,0.4)]", border: "border-green-400", bgHover: "hover:bg-green-900/40" },
-  { name: "Bootstrap", icon: <Layout className="w-8 h-8 text-white" />, subtitle: "Framework", iconBg: "bg-gradient-to-br from-purple-400 to-purple-600", glow: "shadow-[0_4px_32px_0_rgba(168,85,247,0.4)]", border: "border-purple-400", bgHover: "hover:bg-purple-900/40" },
-  { name: "Kotlin", icon: <Feather className="w-8 h-8 text-white" />, subtitle: "Programming Language", iconBg: "bg-gradient-to-br from-purple-400 to-indigo-500", glow: "shadow-[0_4px_32px_0_rgba(139,92,246,0.4)]", border: "border-purple-400", bgHover: "hover:bg-purple-900/40" },
+
   { name: "Python", icon: <Code2 className="w-8 h-8 text-white" />, subtitle: "Programming Language", iconBg: "bg-gradient-to-br from-yellow-400 to-yellow-600", glow: "shadow-[0_4px_32px_0_rgba(250,204,21,0.4)]", border: "border-yellow-400", bgHover: "hover:bg-yellow-900/40" },
-  { name: "Git", icon: <GitBranch className="w-8 h-8 text-white" />, subtitle: "Version Control", iconBg: "bg-gradient-to-br from-orange-400 to-red-500", glow: "shadow-[0_4px_32px_0_rgba(251,191,36,0.4)]", border: "border-orange-400", bgHover: "hover:bg-orange-900/40" },
-  { name: "GitHub", icon: <Github className="w-8 h-8 text-white" />, subtitle: "Version Control", iconBg: "bg-gradient-to-br from-gray-400 to-gray-600", glow: "shadow-[0_4px_32px_0_rgba(156,163,175,0.4)]", border: "border-gray-400", bgHover: "hover:bg-gray-900/40" },
-  { name: "VS Code", icon: <Monitor className="w-8 h-8 text-white" />, subtitle: "Editor", iconBg: "bg-gradient-to-br from-blue-400 to-blue-700", glow: "shadow-[0_4px_32px_0_rgba(59,130,246,0.4)]", border: "border-blue-400", bgHover: "hover:bg-blue-900/40" },
-  { name: "Postman", icon: <Send className="w-8 h-8 text-white" />, subtitle: "API Tool", iconBg: "bg-gradient-to-br from-orange-400 to-yellow-500", glow: "shadow-[0_4px_32px_0_rgba(251,191,36,0.4)]", border: "border-orange-400", bgHover: "hover:bg-orange-900/40" },
-  { name: "Eclipse", icon: <Circle className="w-8 h-8 text-white" />, subtitle: "IDE", iconBg: "bg-gradient-to-br from-indigo-400 to-indigo-700", glow: "shadow-[0_4px_32px_0_rgba(99,102,241,0.4)]", border: "border-indigo-400", bgHover: "hover:bg-indigo-900/40" },
-  { name: "Android Studio", icon: <Smartphone className="w-8 h-8 text-white" />, subtitle: "IDE", iconBg: "bg-gradient-to-br from-green-400 to-green-700", glow: "shadow-[0_4px_32px_0_rgba(16,185,129,0.4)]", border: "border-green-400", bgHover: "hover:bg-green-900/40" },
-  { name: "R Studio", icon: <BarChart2 className="w-8 h-8 text-white" />, subtitle: "IDE", iconBg: "bg-gradient-to-br from-blue-400 to-blue-700", glow: "shadow-[0_4px_32px_0_rgba(59,130,246,0.4)]", border: "border-blue-400", bgHover: "hover:bg-blue-900/40" },
+
   { name: "Figma", icon: <PenTool className="w-8 h-8 text-white" />, subtitle: "Design Tool", iconBg: "bg-gradient-to-br from-pink-400 to-purple-500", glow: "shadow-[0_4px_32px_0_rgba(232,121,249,0.4)]", border: "border-pink-400", bgHover: "hover:bg-pink-900/40" },
-  { name: "IntelliJ IDEA", icon: <Brain className="w-8 h-8 text-white" />, subtitle: "IDE", iconBg: "bg-gradient-to-br from-gray-700 to-black", glow: "shadow-[0_4px_32px_0_rgba(55,65,81,0.4)]", border: "border-gray-700", bgHover: "hover:bg-gray-900/40" },
-  { name: "Python IDLE", icon: <Terminal className="w-8 h-8 text-white" />, subtitle: "IDE", iconBg: "bg-gradient-to-br from-yellow-400 to-yellow-600", glow: "shadow-[0_4px_32px_0_rgba(250,204,21,0.4)]", border: "border-yellow-400", bgHover: "hover:bg-yellow-900/40" },
-  { name: "Cursor", icon: <Bot className="w-8 h-8 text-white" />, subtitle: "Editor", iconBg: "bg-gradient-to-br from-indigo-400 to-indigo-700", glow: "shadow-[0_4px_32px_0_rgba(99,102,241,0.4)]", border: "border-indigo-400", bgHover: "hover:bg-indigo-900/40" },
-  { name: "Jupyter Notebook", icon: <FileCode2 className="w-8 h-8 text-white" />, subtitle: "Tool", iconBg: "bg-gradient-to-br from-orange-500 to-amber-600", glow: "shadow-[0_4px_32px_0_rgba(251,146,60,0.4)]", border: "border-orange-500", bgHover: "hover:bg-orange-900/40" },
+
 ];
 
 // Add skill categories and percentages for the progress bar section
@@ -52,7 +43,9 @@ const SKILL_CARDS = [
   { name: "SQL Database", icon: <Database className="w-7 h-7" />, percent: 85, category: "Database", color: "#003B57" },
   { name: "Java", icon: <Coffee className="w-7 h-7" />, percent: 87, category: "Programming languages", color: "#007396" },
   { name: "MySQL", icon: <DatabaseZap className="w-7 h-7" />, percent: 84, category: "Database", color: "#4479A1" },
+  { name: "Oracle Database", icon: <Database className="w-7 h-7" />, percent: 80, category: "Database", color: "#F80000" },
   { name: "MongoDB", icon: <Leaf className="w-7 h-7" />, percent: 82, category: "Database", color: "#47A248" },
+  { name: "Spring Boot", icon: <Server className="w-7 h-7" />, percent: 85, category: "Technologies & Frameworks", color: "#6DB33F" },
   { name: "Express.js", icon: <Route className="w-7 h-7" />, percent: 80, category: "Technologies & Frameworks", color: "#000000" },
   { name: "React", icon: <Atom className="w-7 h-7" />, percent: 95, category: "Technologies & Frameworks", color: "#61DAFB" },
   { name: "Node.js", icon: <Hexagon className="w-7 h-7" />, percent: 90, category: "Technologies & Frameworks", color: "#339933" },
