@@ -56,6 +56,15 @@ const achievements: Achievement[] = [
     icon: Award,
     image: "/assets/achivements/SkillUp1.png"
   },
+  {
+    title: "Introduction to Graphic Design; Basics of UI/UX",
+    issuer: "Simplilearn SkillUp",
+    year: "2026",
+    type: "Certificate",
+    credentialUrl: "https://simpli-web.app.link/e/S7k6zT44V1b",
+    icon: Award,
+    image: "/assets/achivements/SkillUp2.png"
+  },
 
 ]
 
