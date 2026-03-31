@@ -83,6 +83,14 @@ const achievements: Achievement[] = [
     icon: Award,
     image: "/assets/achivements/SkillUp4.png"
   },
+  {
+    title: "GitHub for Beginners",
+    issuer: "Nisal Gunawardhana",
+    year: "2026",
+    type: "Badge",
+    icon: Trophy,
+    image: "/assets/achivements/GitHub for beginners.png"
+  },
 
 ]
 
@@ -92,6 +100,11 @@ export default function AchivementSection() {
   const [showFullCertificate, setShowFullCertificate] = useState(false)
   const [selectedAchievement, setSelectedAchievement] = useState<Achievement | null>(null)
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [activeCategory, setActiveCategory] = useState<"Certificates" | "Badges">("Certificates")
+
+  const certificates = achievements.filter((item) => item.type.toLowerCase() === "certificate")
+  const badges = achievements.filter((item) => item.type.toLowerCase() === "badge")
+  const filteredAchievements = activeCategory === "Certificates" ? certificates : badges
 
   const scrollLeft = () => {
     if (scrollContainerRef.current) {
@@ -165,15 +178,79 @@ export default function AchivementSection() {
             </motion.div>
           </div>
           <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4 tracking-tight">
-            My Achivements &amp; Certificates
+            My Achivements, Certificates &amp; Badges
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
-            Highlights of the milestones, recognitions, and certifications that mark my journey of growth and achievement.
+            Browse my verified credentials in a clean split view between certificates and badges.
           </p>
         </motion.div>
 
+        <motion.div
+          variants={itemVariants}
+          className="mb-10 flex flex-col items-center gap-3"
+        >
+          <div
+            role="tablist"
+            aria-label="Credential category"
+            className="inline-flex items-center gap-1.5 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 bg-white/85 dark:bg-slate-900/80 backdrop-blur-xl p-1.5 shadow-xl shadow-slate-900/5 dark:shadow-black/30"
+          >
+            <button
+              onClick={() => {
+                setActiveCategory("Certificates")
+                setCurrentIndex(0)
+                if (scrollContainerRef.current) scrollContainerRef.current.scrollTo({ left: 0, behavior: "smooth" })
+              }}
+              role="tab"
+              aria-selected={activeCategory === "Certificates"}
+              className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 min-w-[10rem] justify-center ${
+                activeCategory === "Certificates"
+                  ? "bg-gradient-to-r from-amber-300 via-amber-400 to-orange-400 text-slate-900 shadow-md shadow-amber-500/30"
+                  : "text-slate-600 dark:text-slate-300 hover:bg-slate-100/80 dark:hover:bg-slate-800/80"
+              }`}
+              aria-label="Show certificates"
+            >
+              <GraduationCap className="w-4 h-4" />
+              <span>Certificates</span>
+              <span className={`text-xs px-2 py-0.5 rounded-full border ${
+                activeCategory === "Certificates"
+                  ? "bg-white/80 border-black/10 text-slate-800"
+                  : "bg-white/70 dark:bg-slate-900/60 border-black/10 dark:border-white/10"
+              }`}>
+                {certificates.length}
+              </span>
+            </button>
+
+            <button
+              onClick={() => {
+                setActiveCategory("Badges")
+                setCurrentIndex(0)
+                if (scrollContainerRef.current) scrollContainerRef.current.scrollTo({ left: 0, behavior: "smooth" })
+              }}
+              role="tab"
+              aria-selected={activeCategory === "Badges"}
+              className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 min-w-[10rem] justify-center ${
+                activeCategory === "Badges"
+                  ? "bg-gradient-to-r from-amber-300 via-amber-400 to-orange-400 text-slate-900 shadow-md shadow-amber-500/30"
+                  : "text-slate-600 dark:text-slate-300 hover:bg-slate-100/80 dark:hover:bg-slate-800/80"
+              }`}
+              aria-label="Show badges"
+            >
+              <Trophy className="w-4 h-4" />
+              <span>Badges</span>
+              <span className={`text-xs px-2 py-0.5 rounded-full border ${
+                activeCategory === "Badges"
+                  ? "bg-white/80 border-black/10 text-slate-800"
+                  : "bg-white/70 dark:bg-slate-900/60 border-black/10 dark:border-white/10"
+              }`}>
+                {badges.length}
+              </span>
+            </button>
+          </div>
+
+        </motion.div>
+
         <div className="relative">
-          {achievements.length > 1 && (
+          {filteredAchievements.length > 1 && (
             <>
               <button 
                 onClick={scrollLeft}
@@ -196,76 +273,109 @@ export default function AchivementSection() {
           <motion.div
             ref={scrollContainerRef}
             variants={containerVariants}
-            className={`flex overflow-x-auto pb-8 gap-8 px-4 snap-x scrollbar-hide ${achievements.length === 1 ? "justify-center" : ""}`}
+            className={`flex overflow-x-auto pb-8 gap-8 px-4 snap-x scrollbar-hide ${filteredAchievements.length === 1 ? "justify-center" : ""}`}
           >
-            {achievements.map((item, index) => {
+            {filteredAchievements.length === 0 ? (
+              <div className="w-full flex justify-center">
+                <div className="w-full max-w-xl rounded-2xl border border-dashed border-slate-300/80 dark:border-slate-700/80 bg-white/70 dark:bg-slate-900/60 backdrop-blur-md p-10 text-center">
+                  <Trophy className="w-10 h-10 mx-auto mb-4 text-amber-500" />
+                  <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-2">No badges added yet</h3>
+                  <p className="text-slate-600 dark:text-slate-400">Badge credentials will appear here once added.</p>
+                </div>
+              </div>
+            ) : filteredAchievements.map((item, index) => {
               const Icon = item.icon
+              const isBadge = item.type.toLowerCase() === "badge"
               return (
                 <div key={index} className="inter-var snap-center flex-shrink-0">
-                <div 
-                  onClick={() => setSelectedAchievement(item)}
-                  className="bg-gradient-to-br from-white via-slate-50 to-amber-50/40 dark:from-slate-900 dark:via-slate-900/80 dark:to-amber-900/10 relative group/card border-slate-200/80 dark:border-slate-700/80 w-[20rem] sm:w-[24rem] h-[17rem] rounded-xl p-6 border hover:shadow-2xl hover:shadow-amber-500/20 transition-shadow duration-300 cursor-pointer flex flex-col"
-                >
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="relative">
-                      <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-yellow-400 via-amber-300 to-orange-400 shadow-md flex items-center justify-center border border-yellow-200/80 dark:border-yellow-500/70">
-                        {Icon ? (
-                          <Icon className="w-6 h-6 text-slate-900" />
+                  {isBadge ? (
+                    <button
+                      onClick={() => setSelectedAchievement(item)}
+                      className="group w-[20rem] sm:w-[24rem] bg-transparent text-left"
+                    >
+                      <div className="relative w-full h-[16rem] rounded-2xl overflow-hidden">
+                        {item.image ? (
+                          <Image
+                            src={item.image}
+                            alt={item.title}
+                            fill
+                            className="object-contain"
+                          />
                         ) : (
-                          <span className="text-2xl">🏅</span>
+                          <div className="w-full h-full flex items-center justify-center text-slate-400 dark:text-slate-600">
+                            <Trophy className="w-12 h-12" />
+                          </div>
                         )}
+                        <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                          <span className="text-white font-semibold tracking-wide uppercase text-sm">View Badge</span>
+                        </div>
                       </div>
-                    </div>
+                      <h3 className="mt-4 text-lg font-bold text-slate-900 dark:text-white text-center leading-snug px-2">
+                        {item.title}
+                      </h3>
+                    </button>
+                  ) : (
                     <div 
-                      className="px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400 border border-amber-200 dark:border-amber-700/50 shadow-sm"
+                      onClick={() => setSelectedAchievement(item)}
+                      className="bg-gradient-to-br from-white via-slate-50 to-amber-50/40 dark:from-slate-900 dark:via-slate-900/80 dark:to-amber-900/10 relative group/card border-slate-200/80 dark:border-slate-700/80 w-[20rem] sm:w-[24rem] h-[17rem] p-6 rounded-xl border hover:shadow-2xl hover:shadow-amber-500/20 transition-shadow duration-300 cursor-pointer flex flex-col"
                     >
-                      {item.year}
-                    </div>
-                  </div>
-
-                  <div
-                    className="text-xl font-bold text-slate-900 dark:text-white mb-2 min-h-[3.5rem]"
-                  >
-                    {item.title}
-                  </div>
-                  
-                  <p
-                    className="text-slate-600 dark:text-slate-300 text-sm mb-4 min-h-[3.5rem]"
-                  >
-                    {item.issuer}
-                  </p>
-
-
-
-                  <div className="flex items-center justify-between mt-auto">
-                    <div
-                      className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300 border border-slate-200 dark:border-slate-700"
-                    >
-                      {item.type}
-                    </div>
-
-
-                  </div>
-                  
-                  <div className="absolute inset-0 bg-white/60 dark:bg-slate-900/60 backdrop-blur-[2px] opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 flex items-center justify-center rounded-xl z-10">
-                    <div className="flex flex-col items-center gap-2">
-                      <div className="p-3 rounded-full bg-transparent border border-amber-500 text-amber-600 dark:text-amber-500 shadow-lg shadow-amber-500/20">
-                        <ExternalLink className="w-6 h-6" />
+                      <div className="flex items-start justify-between mb-4">
+                        <div className="relative">
+                          <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-yellow-400 via-amber-300 to-orange-400 shadow-md flex items-center justify-center border border-yellow-200/80 dark:border-yellow-500/70">
+                            {Icon ? (
+                              <Icon className="w-6 h-6 text-slate-900" />
+                            ) : (
+                              <span className="text-2xl">🏅</span>
+                            )}
+                          </div>
+                        </div>
+                        <div 
+                          className="px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400 border border-amber-200 dark:border-amber-700/50 shadow-sm"
+                        >
+                          {item.year}
+                        </div>
                       </div>
-                      <span className="text-slate-900 dark:text-white font-bold text-sm tracking-wide uppercase">View Certificate</span>
+
+                      <div
+                        className="text-xl font-bold text-slate-900 dark:text-white mb-2 min-h-[3.5rem]"
+                      >
+                        {item.title}
+                      </div>
+                      
+                      <p
+                        className="text-slate-600 dark:text-slate-300 text-sm mb-4 min-h-[3.5rem]"
+                      >
+                        {item.issuer}
+                      </p>
+
+                      <div className="flex items-center justify-between mt-auto">
+                        <div
+                          className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300 border border-slate-200 dark:border-slate-700"
+                        >
+                          {item.type}
+                        </div>
+                      </div>
+                      
+                      <div className="absolute inset-0 bg-white/60 dark:bg-slate-900/60 backdrop-blur-[2px] opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 flex items-center justify-center rounded-xl z-10">
+                        <div className="flex flex-col items-center gap-2">
+                          <div className="p-3 rounded-full bg-transparent border border-amber-500 text-amber-600 dark:text-amber-500 shadow-lg shadow-amber-500/20">
+                            <ExternalLink className="w-6 h-6" />
+                          </div>
+                          <span className="text-slate-900 dark:text-white font-bold text-sm tracking-wide uppercase">View Credential</span>
+                        </div>
+                      </div>
+                      
+                      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-amber-100/30 via-transparent to-transparent dark:from-amber-500/10 rounded-b-xl" />
                     </div>
-                  </div>
-                  
-                  <div className="pointer-events-none absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-amber-100/30 via-transparent to-transparent dark:from-amber-500/10 rounded-b-xl" />
-                </div>
+                  )}
               </div>
             )
             })}
           </motion.div>
         
-        {achievements.length > 1 && (
+        {filteredAchievements.length > 1 && (
           <div className="flex justify-center gap-2 mt-6">
-            {achievements.map((_, index) => (
+            {filteredAchievements.map((_, index) => (
               <button
                 key={index}
                 onClick={() => {
