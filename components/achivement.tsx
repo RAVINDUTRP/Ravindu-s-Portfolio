@@ -38,6 +38,15 @@ const achievements: Achievement[] = [
     icon: Award,
     image: "/assets/achivements/AI-ML2.png"
   },
+  {
+    title: "Python for Beginners",
+    issuer: "Centre for Open & Distance Learning - University of Moratuwa",
+    year: "2026",
+    type: "Certificate",
+    credentialUrl: "https://open.uom.lk/verify",
+    icon: Award,
+    image: "/assets/achivements/PythonForBeginners.png"
+  },
 
 ]
 
@@ -159,7 +168,7 @@ export default function AchivementSection() {
                 <div key={index} className="inter-var snap-center flex-shrink-0">
                 <div 
                   onClick={() => setSelectedAchievement(item)}
-                  className="bg-gradient-to-br from-white via-slate-50 to-amber-50/40 dark:from-slate-900 dark:via-slate-900/80 dark:to-amber-900/10 relative group/card border-slate-200/80 dark:border-slate-700/80 w-auto sm:w-[24rem] h-auto rounded-xl p-6 border hover:shadow-2xl hover:shadow-amber-500/20 transition-shadow duration-300 cursor-pointer"
+                  className="bg-gradient-to-br from-white via-slate-50 to-amber-50/40 dark:from-slate-900 dark:via-slate-900/80 dark:to-amber-900/10 relative group/card border-slate-200/80 dark:border-slate-700/80 w-[20rem] sm:w-[24rem] h-[17rem] rounded-xl p-6 border hover:shadow-2xl hover:shadow-amber-500/20 transition-shadow duration-300 cursor-pointer flex flex-col"
                 >
                   <div className="flex items-start justify-between mb-4">
                     <div className="relative">
@@ -179,13 +188,13 @@ export default function AchivementSection() {
                   </div>
 
                   <div
-                    className="text-xl font-bold text-slate-900 dark:text-white mb-2"
+                    className="text-xl font-bold text-slate-900 dark:text-white mb-2 min-h-[3.5rem]"
                   >
                     {item.title}
                   </div>
                   
                   <p
-                    className="text-slate-600 dark:text-slate-300 text-sm mb-4"
+                    className="text-slate-600 dark:text-slate-300 text-sm mb-4 min-h-[3.5rem]"
                   >
                     {item.issuer}
                   </p>
