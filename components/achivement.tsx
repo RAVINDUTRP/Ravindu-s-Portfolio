@@ -47,6 +47,15 @@ const achievements: Achievement[] = [
     icon: Award,
     image: "/assets/achivements/PythonForBeginners.png"
   },
+  {
+    title: "Design Thinking for Beginners",
+    issuer: "Simplilearn SkillUp",
+    year: "2026",
+    type: "Certificate",
+    credentialUrl: "https://simpli-web.app.link/e/9Tb2Ubz7V1b",
+    icon: Award,
+    image: "/assets/achivements/SkillUp1.png"
+  },
 
 ]
 
