@@ -65,6 +65,24 @@ const achievements: Achievement[] = [
     icon: Award,
     image: "/assets/achivements/SkillUp2.png"
   },
+  {
+    title: "Introduction to MEAN Stack",
+    issuer: "Simplilearn SkillUp",
+    year: "2026",
+    type: "Certificate",
+    credentialUrl: "https://simpli-web.app.link/e/JvYiR228W1b",
+    icon: Award,
+    image: "/assets/achivements/SkillUp3.png"
+  },
+  {
+    title: "Introduction to MERN Stack",
+    issuer: "Simplilearn SkillUp",
+    year: "2026",
+    type: "Certificate",
+    credentialUrl: "https://simpli-web.app.link/e/BvaXVsseX1b",
+    icon: Award,
+    image: "/assets/achivements/SkillUp4.png"
+  },
 
 ]
 
