@@ -3,7 +3,7 @@
 import { useRef, useState } from "react"
 import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
-import { Award, Trophy, GraduationCap, ExternalLink, X } from "lucide-react"
+import { Award, Trophy, GraduationCap, ExternalLink, X, Linkedin } from "lucide-react"
 
 import { useScrollAnimationFramer } from "@/hooks/use-scroll-animation"
 
@@ -91,10 +91,35 @@ const achievements: Achievement[] = [
     icon: Trophy,
     image: "/assets/achivements/GitHub for beginners.png"
   },
+  {
+    title: "GitHub Actions - Beginner",
+    issuer: "Nisal Gunawardhana",
+    year: "2026",
+    type: "Badge",
+    icon: Trophy,
+    image: "/assets/achivements/GitHub_Action_Beginner.png"
+  },
+  {
+    title: "GitHub Actions - Intermediate",
+    issuer: "Nisal Gunawardhana",
+    year: "2026",
+    type: "Badge",
+    icon: Trophy,
+    image: "/assets/achivements/GitHub_Action_Intermediate.png"
+  },
+  {
+    title: "GitHub Actions - Advanced",
+    issuer: "Nisal Gunawardhana",
+    year: "2026",
+    type: "Badge",
+    icon: Trophy,
+    image: "/assets/achivements/Github_Action_Advanced.png"
+  },
 
 ]
 
 export default function AchivementSection() {
+  const linkedInProfileUrl = "https://www.linkedin.com/in/ravindu-piyumal-7b0a592a8/"
   const { ref, isInView } = useScrollAnimationFramer()
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const [showFullCertificate, setShowFullCertificate] = useState(false)
@@ -259,7 +284,7 @@ export default function AchivementSection() {
                   {isBadge ? (
                     <button
                       onClick={() => setSelectedAchievement(item)}
-                      className="group w-[20rem] sm:w-[24rem] bg-transparent text-left"
+                      className="group w-[18rem] sm:w-[21rem] bg-transparent text-left"
                     >
                       <div className="relative w-full h-[16rem] rounded-2xl overflow-hidden">
                         {item.image ? (
@@ -489,7 +514,24 @@ export default function AchivementSection() {
                     </div>
                   </div>
 
-                  {selectedAchievement.credentialUrl && selectedAchievement.credentialUrl !== "#" && (
+                  {selectedAchievement.type.toLowerCase() === "badge" ? (
+                    <div className="mt-8">
+                      <a
+                        href={linkedInProfileUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group relative flex items-center justify-center gap-2 w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-blue-600 to-sky-500 text-white font-bold shadow-lg shadow-blue-700/30 hover:shadow-xl hover:shadow-blue-700/40 hover:-translate-y-0.5 transition-all duration-300"
+                      >
+                        <Linkedin className="w-4 h-4 relative z-10" />
+                        <span className="relative z-10">View on LinkedIn</span>
+                        <ExternalLink className="w-4 h-4 relative z-10 group-hover:translate-x-0.5 transition-transform" />
+                        <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-sky-500 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      </a>
+                      <p className="text-xs text-center text-slate-400 mt-3">
+                        View this badge in my LinkedIn profile
+                      </p>
+                    </div>
+                  ) : selectedAchievement.credentialUrl && selectedAchievement.credentialUrl !== "#" && (
                     <div className="mt-8">
                        <a 
                         href={selectedAchievement.credentialUrl}
