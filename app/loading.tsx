@@ -24,7 +24,7 @@ export default function Loading() {
             Loading portfolio
           </h1>
           <p className="mt-3 text-sm sm:text-base text-slate-300 max-w-sm mx-auto">
-            A refined experience is being prepared for you.
+            A refined experience is being prepared.
           </p>
 
           <div className="mt-8 flex items-center justify-center gap-3" aria-hidden="true">
@@ -34,7 +34,7 @@ export default function Loading() {
           </div>
 
           <div className="mt-8 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-xs sm:text-sm text-slate-300">
-            Please wait a moment — everything is coming together.
+            Please wait a moment — everything is loading smoothly.
           </div>
 
           <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-transparent via-cyan-400/60 to-transparent" />

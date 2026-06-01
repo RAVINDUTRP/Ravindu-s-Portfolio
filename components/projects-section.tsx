@@ -80,6 +80,42 @@ export default function ProjectsSection() {
       liveLink: "https://beautiful-hamster-712e1d.netlify.app/",
       category: "Web Development",
       subCategory: "Frontend Development",
+      featured: true,
+    },
+    {
+      id: "web-4",
+      title: "HealthCare+ - Smart Pharmacy Queue Reduction",
+      description: "Smart pharmacy platform that lets patients upload prescriptions so pharmacies prepare orders ahead - significantly reducing wait times.",
+      image: "/assets/pro-images/Healthcare+.png",
+      technologies: ["React.js", ".NET (ASP.NET Core)", "Google Maps API", "Google OAuth"],
+      githubLink: "https://github.com/RAVINDUTRP/HealthCare.git",
+      liveLink: "#",
+      category: "Web Development",
+      subCategory: "Full-Stack Development",
+      featured: true,
+    },
+    {
+      id: "web-5",
+      title: "CampusHub - Smart Campus Operations Hub",
+      description: "Full-stack university platform for facility bookings, maintenance tracking, and real-time notifications.",
+      image: "/assets/pro-images/CampusHub.png",
+      technologies: ["Java", "Spring Boot", "React", "PostgreSQL", "Docker"],
+      githubLink: "https://github.com/RAVINDUTRP/Smart-Campus-Hub.git",
+      liveLink: "#",
+      category: "Web Development",
+      subCategory: "Full-Stack Development",
+    },
+    {
+      id: "web-6",
+      title: "CanteenPro",
+      description: "MERN-based canteen management system with online ordering, real-time tracking, role-based dashboards, analytics, and feedback handling.",
+      image: "/assets/pro-images/CanteenPro.png",
+      technologies: ["React", "Node.js", "Express.js", "MongoDB", "JWT Auth"],
+      githubLink: "https://github.com/RAVINDUTRP/Canteen-Pro.git",
+      liveLink: "#",
+      category: "Web Development",
+      subCategory: "Full-Stack Development",
+      featured: true,
     },
     // Mobile Application
     {
@@ -173,6 +209,7 @@ export default function ProjectsSection() {
   ];
   const webSubcategories = [
     "All",
+    "Featured",
     "Frontend Development",
     "Backend Development",
     "Full-Stack Development",
@@ -255,7 +292,7 @@ export default function ProjectsSection() {
           >
             {[...projects]
               .filter(p => p.category === selectedCategory)
-              .filter(p => selectedCategory !== 'Web Development' || selectedWebSub === 'All' || (p as any).subCategory === selectedWebSub)
+              .filter(p => selectedCategory !== 'Web Development' || selectedWebSub === 'All' || (selectedWebSub === 'Featured' ? (p as any).featured : (p as any).subCategory === selectedWebSub))
               .filter(p => selectedCategory !== 'Mobile Application' || !/demo/i.test(p.title + p.description))
               .reverse()
               .map((project, index) => {
@@ -401,7 +438,7 @@ function GithubButton({ githubLink }: { githubLink: string }) {
       onMouseLeave={() => setIsActive(false)}
       onClick={e => { setIsActive(false); (e.currentTarget as HTMLAnchorElement).blur(); }}
     >
-      <span className={`block w-full h-full rounded-full overflow-hidden flex items-center justify-center transition-all duration-200
+      <span className={`inline-flex w-full h-full rounded-full overflow-hidden items-center justify-center transition-all duration-200
         ${isActive ? 'scale-95 shadow-none' : 'group-hover:scale-110 group-hover:shadow-[0_0_0_4px_rgba(36,41,47,0.15)]'}
       `}>
         <Image src="/assets/pro-images/github-light.svg" alt="GitHub" width={32} height={32} className="w-full h-full object-contain" />
@@ -427,7 +464,7 @@ function FigmaButton({ figmaLink }: { figmaLink: string }) {
       onMouseLeave={() => setIsActive(false)}
       onClick={e => { setIsActive(false); (e.currentTarget as HTMLAnchorElement).blur(); }}
     >
-      <span className={`block w-full h-full rounded-full overflow-hidden flex items-center justify-center transition-all duration-200
+      <span className={`inline-flex w-full h-full rounded-full overflow-hidden items-center justify-center transition-all duration-200
         ${isActive ? 'scale-95 shadow-none' : 'group-hover:scale-110 group-hover:shadow-[0_0_0_4px_rgba(36,41,47,0.15)]'}
       `}>
         <Image src="/assets/pro-images/figma.gif" alt="Figma" width={24} height={24} className="w-6 h-6 dark:w-5 dark:h-5 object-contain" />
