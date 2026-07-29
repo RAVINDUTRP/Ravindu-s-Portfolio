@@ -21,49 +21,13 @@ type Achievement = {
 
 const achievements: Achievement[] = [
   {
-    title: "AI/ML Engineer - Stage 1",
-    issuer: "Centre for Open and Distance Education - SLIIT",
-    year: "2025",
-    type: "Certificate",
-    credentialUrl: "https://code.sliit.org/certificates/6watlhu8tn",
-    icon: Award,
-    image: "/assets/achivements/AI-ML.png"
-  },
-  {
-    title: "AI/ML Engineer - Stage 2",
-    issuer: "Centre for Open and Distance Education - SLIIT",
-    year: "2026",
-    type: "Certificate",
-    credentialUrl: "https://code.sliit.org/certificates/7hd3rjbj4x",
-    icon: Award,
-    image: "/assets/achivements/AI-ML2.png"
-  },
-  {
-    title: "Python for Beginners",
-    issuer: "Centre for Open & Distance Learning - University of Moratuwa",
-    year: "2026",
-    type: "Certificate",
-    credentialUrl: "https://open.uom.lk/verify",
-    icon: Award,
-    image: "/assets/achivements/PythonForBeginners.png"
-  },
-  {
-    title: "Design Thinking for Beginners",
+    title: "Introduction to MERN Stack",
     issuer: "Simplilearn SkillUp",
     year: "2026",
     type: "Certificate",
-    credentialUrl: "https://simpli-web.app.link/e/9Tb2Ubz7V1b",
+    credentialUrl: "https://simpli-web.app.link/e/BvaXVsseX1b",
     icon: Award,
-    image: "/assets/achivements/SkillUp1.png"
-  },
-  {
-    title: "Introduction to Graphic Design; Basics of UI/UX",
-    issuer: "Simplilearn SkillUp",
-    year: "2026",
-    type: "Certificate",
-    credentialUrl: "https://simpli-web.app.link/e/S7k6zT44V1b",
-    icon: Award,
-    image: "/assets/achivements/SkillUp2.png"
+    image: "/assets/achivements/SkillUp4.png"
   },
   {
     title: "Introduction to MEAN Stack",
@@ -75,13 +39,49 @@ const achievements: Achievement[] = [
     image: "/assets/achivements/SkillUp3.png"
   },
   {
-    title: "Introduction to MERN Stack",
+    title: "Introduction to Graphic Design; Basics of UI/UX",
     issuer: "Simplilearn SkillUp",
     year: "2026",
     type: "Certificate",
-    credentialUrl: "https://simpli-web.app.link/e/BvaXVsseX1b",
+    credentialUrl: "https://simpli-web.app.link/e/S7k6zT44V1b",
     icon: Award,
-    image: "/assets/achivements/SkillUp4.png"
+    image: "/assets/achivements/SkillUp2.png"
+  },
+  {
+    title: "Design Thinking for Beginners",
+    issuer: "Simplilearn SkillUp",
+    year: "2026",
+    type: "Certificate",
+    credentialUrl: "https://simpli-web.app.link/e/9Tb2Ubz7V1b",
+    icon: Award,
+    image: "/assets/achivements/SkillUp1.png"
+  },
+  {
+    title: "Python for Beginners",
+    issuer: "Centre for Open & Distance Learning - University of Moratuwa",
+    year: "2026",
+    type: "Certificate",
+    credentialUrl: "https://open.uom.lk/verify",
+    icon: Award,
+    image: "/assets/achivements/PythonForBeginners.png"
+  },
+  {
+    title: "AI/ML Engineer - Stage 2",
+    issuer: "Centre for Open and Distance Education - SLIIT",
+    year: "2026",
+    type: "Certificate",
+    credentialUrl: "https://code.sliit.org/certificates/7hd3rjbj4x",
+    icon: Award,
+    image: "/assets/achivements/AI-ML2.png"
+  },
+  {
+    title: "AI/ML Engineer - Stage 1",
+    issuer: "Centre for Open and Distance Education - SLIIT",
+    year: "2025",
+    type: "Certificate",
+    credentialUrl: "https://code.sliit.org/certificates/6watlhu8tn",
+    icon: Award,
+    image: "/assets/achivements/AI-ML.png"
   },
   {
     title: "GitHub for Beginners",
@@ -115,7 +115,6 @@ const achievements: Achievement[] = [
     icon: Trophy,
     image: "/assets/achivements/Github_Action_Advanced.png"
   },
-
 ]
 
 export default function AchivementSection() {
