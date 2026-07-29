@@ -21,6 +21,24 @@ type Achievement = {
 
 const achievements: Achievement[] = [
   {
+    title: "Introduction to the Basics of Azure Services",
+    issuer: "Microsoft Certified ",
+    year: "2026",
+    type: "Certificate",
+    credentialUrl: "https://simpli-web.app.link/e/31nbkWaha2b",
+    icon: Award,
+    image: "/assets/achivements/Ms2.png"
+  },
+  {
+    title: "Azure Fundamentals",
+    issuer: "Microsoft Certified ",
+    year: "2026",
+    type: "Certificate",
+    credentialUrl: "https://simpli-web.app.link/e/sYm0STXe91b",
+    icon: Award,
+    image: "/assets/achivements/Ms1.png"
+  },
+  {
     title: "Introduction to Java Spring framework 101",
     issuer: "Simplilearn SkillUp",
     year: "2026",
