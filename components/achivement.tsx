@@ -21,6 +21,15 @@ type Achievement = {
 
 const achievements: Achievement[] = [
   {
+    title: "Introduction to Java Spring framework 101",
+    issuer: "Simplilearn SkillUp",
+    year: "2026",
+    type: "Certificate",
+    credentialUrl: "https://simpli-web.app.link/e/lF3877lk71b",
+    icon: Award,
+    image: "/assets/achivements/SkillUp5.png"
+  },
+  {
     title: "Introduction to MERN Stack",
     issuer: "Simplilearn SkillUp",
     year: "2026",
