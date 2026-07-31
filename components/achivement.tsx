@@ -400,7 +400,7 @@ export default function AchivementSection() {
           )}
         
         {filteredAchievements.length > 1 && (
-          <div className="flex justify-center items-center gap-4 mt-4">
+          <div className="flex justify-center items-center gap-6 mt-4">
             <button
               onClick={() => {
                 if (scrollContainerRef.current && currentIndex > 0) {
@@ -411,36 +411,21 @@ export default function AchivementSection() {
                 }
               }}
               disabled={currentIndex === 0}
-              className={`px-3 py-2 rounded-lg text-lg font-bold transition-all duration-300 ${
+              className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 ${
                 currentIndex === 0
                   ? "text-slate-400 dark:text-slate-600 cursor-not-allowed"
-                  : "text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800"
+                  : "text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800 hover:scale-110"
               }`}
               aria-label="Previous"
             >
-              &lt;
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
             </button>
-            <div className="flex items-center gap-2">
-              {filteredAchievements.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => {
-                    if (scrollContainerRef.current) {
-                      const cardWidth = 400
-                      scrollContainerRef.current.scrollTo({ left: index * cardWidth, behavior: "smooth" })
-                      setCurrentIndex(index)
-                    }
-                  }}
-                  className={`w-10 h-10 rounded-lg text-lg font-bold transition-all duration-300 ${
-                    index === currentIndex
-                      ? "bg-gradient-to-r from-amber-400 to-orange-400 text-slate-900 shadow-md shadow-amber-500/30"
-                      : "text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800"
-                  }`}
-                  aria-label={`Go to achievement ${index + 1}`}
-                >
-                  {index + 1}
-                </button>
-              ))}
+            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 dark:bg-slate-800">
+              <span className="text-lg font-bold text-slate-700 dark:text-slate-300">{currentIndex + 1}</span>
+              <span className="text-slate-400 dark:text-slate-500">/</span>
+              <span className="text-lg font-semibold text-slate-500 dark:text-slate-400">{filteredAchievements.length}</span>
             </div>
             <button
               onClick={() => {
@@ -452,14 +437,16 @@ export default function AchivementSection() {
                 }
               }}
               disabled={currentIndex === filteredAchievements.length - 1}
-              className={`px-3 py-2 rounded-lg text-lg font-bold transition-all duration-300 ${
+              className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 ${
                 currentIndex === filteredAchievements.length - 1
                   ? "text-slate-400 dark:text-slate-600 cursor-not-allowed"
-                  : "text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800"
+                  : "text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800 hover:scale-110"
               }`}
               aria-label="Next"
             >
-              &gt;
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
             </button>
           </div>
           )}
