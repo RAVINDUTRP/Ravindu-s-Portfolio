@@ -219,18 +219,27 @@ export default function ProjectsSection() {
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
   const [selectedWebSub, setSelectedWebSub] = useState<string>(webSubcategories[0]);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollLeft = 0;
     }
+    setCurrentIndex(0);
   }, [selectedCategory]);
 
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollLeft = 0;
     }
+    setCurrentIndex(0);
   }, [selectedWebSub]);
+
+  const filteredProjects = [...projects]
+    .filter(p => p.category === selectedCategory)
+    .filter(p => selectedCategory !== 'Web Development' || selectedWebSub === 'All' || (selectedWebSub === 'Featured' ? (p as any).featured : (p as any).subCategory === selectedWebSub))
+    .filter(p => selectedCategory !== 'Mobile Application' || !/demo/i.test(p.title + p.description))
+    .reverse();
 
   return (
     <motion.div 
@@ -289,13 +298,14 @@ export default function ProjectsSection() {
             ref={scrollRef}
             variants={containerVariants}
             className="flex gap-4 sm:gap-6 overflow-x-auto hide-scrollbar p-3 sm:p-6 mt-8"
+            onScroll={(e) => {
+              const container = e.currentTarget;
+              const cardWidth = container.children[0]?.getBoundingClientRect().width || 340;
+              const newIndex = Math.round(container.scrollLeft / (cardWidth + 24));
+              setCurrentIndex(Math.min(newIndex, filteredProjects.length - 1));
+            }}
           >
-            {[...projects]
-              .filter(p => p.category === selectedCategory)
-              .filter(p => selectedCategory !== 'Web Development' || selectedWebSub === 'All' || (selectedWebSub === 'Featured' ? (p as any).featured : (p as any).subCategory === selectedWebSub))
-              .filter(p => selectedCategory !== 'Mobile Application' || !/demo/i.test(p.title + p.description))
-              .reverse()
-              .map((project, index) => {
+            {filteredProjects.map((project, index) => {
               // Determine font size based on description length
               let descFontSize = "text-base";
               if (project.description.length < 80) descFontSize = "text-lg";
@@ -399,6 +409,58 @@ export default function ProjectsSection() {
             })}
           </motion.div>
         </div>
+
+        {filteredProjects.length > 1 && (
+          <div className="flex justify-center items-center gap-6 mt-4">
+            <button
+              onClick={() => {
+                if (scrollRef.current && currentIndex > 0) {
+                  const newIndex = currentIndex - 1
+                  const cardWidth = scrollRef.current.children[0]?.getBoundingClientRect().width || 340
+                  scrollRef.current.scrollTo({ left: newIndex * (cardWidth + 24), behavior: "smooth" })
+                  setCurrentIndex(newIndex)
+                }
+              }}
+              disabled={currentIndex === 0}
+              className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 ${
+                currentIndex === 0
+                  ? "text-slate-400 dark:text-slate-600 cursor-not-allowed"
+                  : "text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800 hover:scale-110"
+              }`}
+              aria-label="Previous"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 dark:bg-slate-800">
+              <span className="text-lg font-bold text-slate-700 dark:text-slate-300">{currentIndex + 1}</span>
+              <span className="text-slate-400 dark:text-slate-500">/</span>
+              <span className="text-lg font-semibold text-slate-500 dark:text-slate-400">{filteredProjects.length}</span>
+            </div>
+            <button
+              onClick={() => {
+                if (scrollRef.current && currentIndex < filteredProjects.length - 1) {
+                  const newIndex = currentIndex + 1
+                  const cardWidth = scrollRef.current.children[0]?.getBoundingClientRect().width || 340
+                  scrollRef.current.scrollTo({ left: newIndex * (cardWidth + 24), behavior: "smooth" })
+                  setCurrentIndex(newIndex)
+                }
+              }}
+              disabled={currentIndex === filteredProjects.length - 1}
+              className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 ${
+                currentIndex === filteredProjects.length - 1
+                  ? "text-slate-400 dark:text-slate-600 cursor-not-allowed"
+                  : "text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800 hover:scale-110"
+              }`}
+              aria-label="Next"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+        )}
        <style jsx global>{`
          .hide-scrollbar::-webkit-scrollbar {
            display: none;
