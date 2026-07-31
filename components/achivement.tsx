@@ -400,25 +400,67 @@ export default function AchivementSection() {
           )}
         
         {filteredAchievements.length > 1 && (
-          <div className="flex justify-center gap-2 mt-4">
-            {filteredAchievements.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => {
-                  if (scrollContainerRef.current) {
-                    const cardWidth = 400
-                    scrollContainerRef.current.scrollTo({ left: index * cardWidth, behavior: "smooth" })
-                    setCurrentIndex(index)
-                  }
-                }}
-                className={`transition-all duration-300 rounded-full ${
-                  index === currentIndex
-                    ? "w-8 h-2.5 bg-gradient-to-r from-amber-400 to-orange-400 shadow-md shadow-amber-500/30"
-                    : "w-2.5 h-2.5 bg-slate-400/70 dark:bg-slate-600 hover:bg-amber-300 dark:hover:bg-amber-600"
-                }`}
-                aria-label={`Go to achievement ${index + 1}`}
-              />
-            ))}
+          <div className="flex justify-center items-center gap-4 mt-4">
+            <button
+              onClick={() => {
+                if (scrollContainerRef.current && currentIndex > 0) {
+                  const newIndex = currentIndex - 1
+                  const cardWidth = 400
+                  scrollContainerRef.current.scrollTo({ left: newIndex * cardWidth, behavior: "smooth" })
+                  setCurrentIndex(newIndex)
+                }
+              }}
+              disabled={currentIndex === 0}
+              className={`px-3 py-2 rounded-lg text-lg font-bold transition-all duration-300 ${
+                currentIndex === 0
+                  ? "text-slate-400 dark:text-slate-600 cursor-not-allowed"
+                  : "text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800"
+              }`}
+              aria-label="Previous"
+            >
+              &lt;
+            </button>
+            <div className="flex items-center gap-2">
+              {filteredAchievements.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => {
+                    if (scrollContainerRef.current) {
+                      const cardWidth = 400
+                      scrollContainerRef.current.scrollTo({ left: index * cardWidth, behavior: "smooth" })
+                      setCurrentIndex(index)
+                    }
+                  }}
+                  className={`w-10 h-10 rounded-lg text-lg font-bold transition-all duration-300 ${
+                    index === currentIndex
+                      ? "bg-gradient-to-r from-amber-400 to-orange-400 text-slate-900 shadow-md shadow-amber-500/30"
+                      : "text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800"
+                  }`}
+                  aria-label={`Go to achievement ${index + 1}`}
+                >
+                  {index + 1}
+                </button>
+              ))}
+            </div>
+            <button
+              onClick={() => {
+                if (scrollContainerRef.current && currentIndex < filteredAchievements.length - 1) {
+                  const newIndex = currentIndex + 1
+                  const cardWidth = 400
+                  scrollContainerRef.current.scrollTo({ left: newIndex * cardWidth, behavior: "smooth" })
+                  setCurrentIndex(newIndex)
+                }
+              }}
+              disabled={currentIndex === filteredAchievements.length - 1}
+              className={`px-3 py-2 rounded-lg text-lg font-bold transition-all duration-300 ${
+                currentIndex === filteredAchievements.length - 1
+                  ? "text-slate-400 dark:text-slate-600 cursor-not-allowed"
+                  : "text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800"
+              }`}
+              aria-label="Next"
+            >
+              &gt;
+            </button>
           </div>
           )}
         </div>
