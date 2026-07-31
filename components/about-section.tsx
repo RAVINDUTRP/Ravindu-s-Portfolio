@@ -131,14 +131,14 @@ export default function AboutSection() {
                 whileHover={{ scale: 1.05 }}
                 className="text-center"
               >
-                <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">3rd Year</div>
+                <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">4th Year</div>
                 <div className="text-gray-600 dark:text-gray-400">Undergraduate at SLIIT</div>
               </motion.div>
               <motion.div 
                 whileHover={{ scale: 1.05 }}
                 className="text-center"
               >
-                <div className="text-3xl font-bold text-purple-600 dark:text-purple-400">7+</div>
+                <div className="text-3xl font-bold text-purple-600 dark:text-purple-400">10+</div>
                 <div className="text-gray-600 dark:text-gray-400">Projects Completed</div>
               </motion.div>
             </motion.div>
