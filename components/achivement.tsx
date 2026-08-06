@@ -21,6 +21,15 @@ type Achievement = {
 
 const achievements: Achievement[] = [
   {
+    title: "Amazon EC2 Basics",
+    issuer: "AWS Training & Certification",
+    year: "2026",
+    type: "Certificate",
+    credentialUrl: "https://skillbuilder.aws/learn/V59J92TZE2/amazon-ec2-basics/N1KVF1P1AV",
+    icon: Award,
+    image: "/assets/achivements/AWS1.png"
+  },
+  {
     title: "Introduction to the Basics of Azure Services",
     issuer: "Microsoft Certified ",
     year: "2026",
