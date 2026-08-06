@@ -277,8 +277,8 @@ export default function EducationSection() {
                     setIsScrolling(true);
                     setTimeout(() => {
                       cardRefs.current[idx]?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                      setTimeout(() => setIsScrolling(false), 900); // 900ms for slower, smoother scroll
-                    }, 400);
+                      setTimeout(() => setIsScrolling(false), 900);
+                    }, 80);
                   }
                 }}
                 style={{ cursor: 'pointer' }}
