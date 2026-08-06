@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme-toggle"
-import { animate } from "framer-motion"
+import { animate, motion, AnimatePresence } from "framer-motion"
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -132,32 +132,80 @@ export default function Navbar() {
                   <Button
                     variant="ghost"
                     size="icon"
-                    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                    className="h-8 w-8 rounded-full hover:bg-accent/50"
+                    onClick={() => setIsMobileMenuOpen(true)}
+                    className="h-8 w-8 rounded-full hover:bg-accent/50 text-foreground"
                   >
-                    {isMobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+                    <Menu className="h-5 w-5" />
                   </Button>
                 </div>
               </div>
             </div>
-
-            {/* Mobile Menu Dropdown */}
-            {isMobileMenuOpen && (
-              <div className="absolute top-full left-0 right-0 mt-2 bg-background/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-border/50 p-4 space-y-2">
-                {navItems.map((item) => (
-                  <button
-                    key={item.name}
-                    onClick={() => scrollToSection(item.href)}
-                    className="block w-full text-left px-4 py-2 text-sm font-medium text-foreground hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-200 rounded-lg hover:bg-accent/50"
-                  >
-                    {item.name}
-                  </button>
-                ))}
-              </div>
-            )}
           </div>
         </div>
       </nav>
+
+      {/* Modern Slide-Out Half Sidebar Menu */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <>
+            {/* Backdrop Overlay */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] md:hidden"
+            />
+
+            {/* Right-Side Slide-Out Half Sidebar */}
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 220 }}
+              className="fixed right-0 top-0 bottom-0 w-[75vw] max-w-[300px] h-full bg-white/95 dark:bg-[#0b0f19]/95 backdrop-blur-2xl border-l border-slate-200/50 dark:border-slate-800/60 shadow-2xl p-6 flex flex-col z-[101] md:hidden"
+            >
+              {/* Sidebar Header */}
+              <div className="flex items-center justify-between pb-6 border-b border-slate-200/80 dark:border-slate-800/80">
+                <span className="font-bold text-lg bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
+                  MyPortfolio ✨
+                </span>
+                <div className="flex items-center gap-2">
+                  <ThemeToggle />
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="rounded-full hover:bg-slate-100 dark:hover:bg-white/10"
+                  >
+                    <X className="h-6 w-6 text-gray-800 dark:text-gray-200" />
+                  </Button>
+                </div>
+              </div>
+
+              {/* Navigation Links */}
+              <div className="flex flex-col gap-3 mt-8">
+                {navItems.map((item, index) => (
+                  <motion.button
+                    key={item.name}
+                    initial={{ opacity: 0, x: 25 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.05 }}
+                    onClick={() => scrollToSection(item.href)}
+                    className="w-full text-left px-4 py-3 text-base font-semibold text-gray-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50/50 dark:hover:bg-white/5 rounded-xl transition-all duration-200 flex items-center justify-between group"
+                  >
+                    <span>{item.name}</span>
+                    <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-blue-500 dark:text-blue-400 font-bold">
+                      →
+                    </span>
+                  </motion.button>
+                ))}
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </>
   )
 }

@@ -2,7 +2,6 @@ export default function Loading() {
   return (
     <main className="relative min-h-screen flex items-center justify-center overflow-hidden px-6 bg-[#050816]">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(59,130,246,0.18),_transparent_34%),radial-gradient(circle_at_bottom_left,_rgba(168,85,247,0.16),_transparent_30%),radial-gradient(circle_at_bottom_right,_rgba(34,211,238,0.14),_transparent_28%)]" />
-      <div className="absolute inset-0 opacity-30 [background-image:radial-gradient(rgba(255,255,255,0.65)_1px,transparent_1px)] [background-size:28px_28px]" />
 
       <div className="relative w-full max-w-lg">
         <div className="absolute -inset-6 rounded-[2rem] bg-gradient-to-r from-blue-500/20 via-violet-500/20 to-cyan-400/20 blur-3xl animate-pulse" />
