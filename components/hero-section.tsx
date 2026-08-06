@@ -1,15 +1,15 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Download, Eye, ArrowRight } from "lucide-react"
+import { Download, Eye, ArrowRight, Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { motion, useMotionValue, useMotionTemplate } from "framer-motion"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { useIsMobile } from "@/components/ui/use-mobile"
-import { Menu, X } from "lucide-react"
 import dynamic from 'next/dynamic';
 
 const PDFDownloadButton = dynamic(() => import('@/components/PDFDownloadButton'), { ssr: false });
+const Hero3D = dynamic(() => import('@/components/hero-3d'), { ssr: false });
 
 export default function Hero() {
   const mouseX = useMotionValue(0)
@@ -129,6 +129,10 @@ export default function Hero() {
             </div>
           ))}
         </div>
+        {/* 3D Animated Background Scene */}
+        <div className="absolute inset-0 z-0 opacity-60 dark:opacity-75 pointer-events-none">
+          <Hero3D />
+        </div>
       </div>
       {/* Down Arrow to About Me */}
       <a href="#about" aria-label="Scroll to About Me"
@@ -244,8 +248,10 @@ export default function Hero() {
             </Button>
             <PDFDownloadButton />
           </div>
+
         </div>
       </div>
+
     </section>
   )
 }
