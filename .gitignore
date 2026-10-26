@@ -16,6 +16,7 @@ build/
 .vercel
 .netlify/
 .turbo/
+.kilo/
 
 # Environment variables
 .env*
@@ -41,15 +42,9 @@ Icon
 # Build/Test
 coverage/
 *.tsbuildinfo
-dist/
-
-# Lockfiles (optional - uncomment if desired)
-# package-lock.json
-# yarn.lock
-# pnpm-lock.yaml
+*.eslintcache
 
 # Misc
 .cache
 **/.cache/
 **/*.local
-
