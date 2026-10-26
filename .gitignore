@@ -48,3 +48,16 @@ coverage/
 .cache
 **/.cache/
 **/*.local
+
+# Requested root files
+README.md
+components.json
+eval "$(ssh-agent -s)"
+eval "$(ssh-agent -s)".pub
+next-env.d.ts
+next.config.mjs
+package-lock.json
+package.json
+postcss.config.mjs
+tailwind.config.ts
+tsconfig.json
