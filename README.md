@@ -1,6 +1,6 @@
 # Ravindu's Portfolio
 
-Welcome to my personal portfolio website! This site showcases my projects, skills, and contact information. Built using **React** and **Next.js**, it demonstrates my front-end development abilities and modern web design skills.
+Welcome to my personal portfolio website! This site showcases my projects, skills, and contact information. Built using **React** and **Next.js**, it demonstrates my front-end development abilities and modern web design skills. 
 
 ## 🚀 Live Website : [Visit My Portfolio](https://beautiful-hamster-712e1d.netlify.app/)
 <img width="1470" height="794" alt="image" src="https://github.com/user-attachments/assets/87939fd9-49b4-45e3-b3cc-73290f1a34b5" />
